@@ -9,8 +9,8 @@ android {
         applicationId "kr.co.bizspring.insight"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
     }
 
     compileOptions {
@@ -37,10 +37,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.+'
 }
 
-def coreAarFile = file('build/insight-api-android-aar.aar')
-artifacts {
-    archives coreAarFile
-}
+//def coreAarFile = file('build/outputs/aar/Insight-release.aar')
+//artifacts {
+//    archives coreAarFile
+//}
+
 uploadArchives {
     repositories {
         mavenDeployer {
