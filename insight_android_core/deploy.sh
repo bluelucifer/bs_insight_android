@@ -1,1 +1,1 @@
- ./gradlew build uploadArchives 
+ ./gradlew uploadArchives

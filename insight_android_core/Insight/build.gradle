@@ -48,7 +48,7 @@ uploadArchives {
             repository(url: "file:///Users/zerolucifer/Documents/git/bs_insight_android.git")
             pom.groupId = 'kr.co.bizspring'
             pom.artifactId = 'insight-android-sdk'
-            pom.version = '0.1.0'
+            pom.version = '0.1.1'
         }
     }
 }
