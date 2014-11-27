@@ -85,7 +85,7 @@ public class Profiler {
         return profileDB.getInt(StaticValues.PARAM_LTRVNC);
     }
     public long getLtrvni() {
-        return profileDB.getInt(StaticValues.PARAM_LTRVNI);
+        return profileDB.getLong(StaticValues.PARAM_LTRVNI);
     }
 
     public void notifyLtrvnc(){
