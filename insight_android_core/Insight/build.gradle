@@ -9,8 +9,8 @@ android {
         applicationId "kr.co.bizspring.insight"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 6
-        versionName "0.1.6"
+        versionCode 7
+        versionName "0.1.7"
     }
 
     compileOptions {
@@ -48,7 +48,7 @@ uploadArchives {
             repository(url: "file:///Users/zerolucifer/Documents/git/bs_insight_android.git")
             pom.groupId = 'kr.co.bizspring'
             pom.artifactId = 'insight-android-sdk'
-            pom.version = '0.1.6'
+            pom.version = '0.1.7'
         }
     }
 }

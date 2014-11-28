@@ -33,7 +33,6 @@ public class BSTracker {
 
     public static BSTracker instance;
     Context mContext;
-//    Map<String,Long> pageTimerMap;
     Map<String,HashMap<String,Object>> pageMap;
     public static BSTracker getInstance(){
         if(instance==null){
@@ -42,7 +41,6 @@ public class BSTracker {
         return instance;
     }
     protected BSTracker(){
-//        pageTimerMap = new HashMap<String, Long>();
         pageMap = new HashMap<String, HashMap<String, Object>>();
     }
     public void init(Context _context){
@@ -52,16 +50,6 @@ public class BSTracker {
         _context.startService(intent1);
     }
 
-    public void startSession(){
-        Intent intent = new Intent(mContext, InsightService.class);
-        intent.setAction(SiginalIndex.ON_START_SESSION);
-        mContext.startService(intent);
-    }
-    public void endSession(){
-        Intent intent = new Intent(mContext, InsightService.class);
-        intent.setAction(SiginalIndex.ON_END_SESSION);
-        mContext.startService(intent);
-    }
     public boolean sendTransaction(){
         //이건 바뀌어야함!!
         Intent intent = new Intent(mContext, InsightService.class);
@@ -70,11 +58,10 @@ public class BSTracker {
         return true;
     }
 
-    public void setGoal(int key, int value){
-//        documentManager.setGoal(key,value);
+    public void setGoal(String key, String value){
 
     }
-    public boolean trkGoal(int key, int value){
+    public boolean trkGoal(String key, String value){
         setGoal(key,value);
         return sendTransaction();
     }
