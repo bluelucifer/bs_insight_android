@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import kr.co.bizspring.insight.lib.config.BSConfig;
+import kr.co.bizspring.insight.lib.tracker.BSSession;
 import kr.co.bizspring.insight.lib.util.BSDebugger;
 import kr.co.bizspring.insight.lib.tracker.DocumentManager;
 import kr.co.bizspring.insight.lib.tracker.Profiler;
@@ -261,6 +262,8 @@ public class BSTracker {
         if(type == TrackType.TYPE_REVENUE){
             Profiler.getInstance(mContext).notifyLtrvnc();
         }
+        BSDebugger.logValue(type);
+        BSSession.getInstance(mContext,BSConfig.getInstance(mContext)).getSession(true);
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {

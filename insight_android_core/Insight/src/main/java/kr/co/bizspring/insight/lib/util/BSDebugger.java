@@ -19,6 +19,16 @@ public class BSDebugger {
         }
         return isDebug();
     }
+
+    public static boolean logValue(Object value){
+        if(isDebug()){
+            String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+            String valueName = value.getClass().getName();
+            Log.d(StaticValues.DEBUG_TAG,methodName+":"+valueName+":"+value.toString());
+        }
+        return isDebug();
+    }
+
     public static boolean log(String message){
         try {
             Log.d(StaticValues.DEBUG_TAG,message);

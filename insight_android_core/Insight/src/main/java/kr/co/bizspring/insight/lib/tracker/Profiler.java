@@ -140,4 +140,9 @@ public class Profiler {
         }
         profileDB.putString(StaticValues.PARAM_FB_SOURCE,refText);
     }
+
+    public void initOrderPTime() {
+        long currentOrderPtm = System.currentTimeMillis()/1000;
+        profileDB.putLong(StaticValues.RECENT_ORDER_PTM,currentOrderPtm);
+    }
 }

@@ -9,8 +9,8 @@ android {
         applicationId "kr.co.bizspring.insight"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 7
-        versionName "0.1.7"
+        versionCode 8
+        versionName "0.1.8"
     }
 
     compileOptions {
@@ -27,7 +27,7 @@ android {
 
 repositories {
     mavenCentral()
-    jcenter()
+   //jcenter()
 }
 
 dependencies {
@@ -36,7 +36,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.+'
     compile 'com.android.support:appcompat-v7:21.+'
 }
-
 //def coreAarFile = file('build/outputs/aar/Insight-release.aar')
 //artifacts {
 //    archives coreAarFile
@@ -48,7 +47,7 @@ uploadArchives {
             repository(url: "file:///Users/zerolucifer/Documents/git/bs_insight_android.git")
             pom.groupId = 'kr.co.bizspring'
             pom.artifactId = 'insight-android-sdk'
-            pom.version = '0.1.7'
+            pom.version = '0.1.8'
         }
     }
 }

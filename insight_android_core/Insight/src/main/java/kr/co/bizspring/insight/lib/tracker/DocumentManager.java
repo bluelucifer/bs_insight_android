@@ -312,8 +312,12 @@ public class DocumentManager {
                 //신규 방문 시 이벤트 처리
                 ltvt++;
                 documentDB.putInt(StaticValues.PARAM_LTVT,ltvt);
-                long recentVisitPtm = documentDB.getLong(StaticValues.PARAM_RECENT_VISIT_PTM);
-                long currentTimeSec = System.currentTimeMillis()/1000;
+//                long recentVisitPtm = documentDB.getLong(StaticValues.PARAM_RECENT_VISIT_PTM);
+//                long currentTimeSec = System.currentTimeMillis()/1000;
+                if(ltvt==1){
+                    initRecentVisitPTime();
+                    profiler.initOrderPTime();
+                }
                 updateLtvi();
                 updateUdVt();
             }else{
@@ -486,27 +490,83 @@ public class DocumentManager {
     private void updateLtvi() {
         long recentVisitPtm = documentDB.getLong(StaticValues.PARAM_RECENT_VISIT_PTM);
         long currentTimeSec = System.currentTimeMillis()/1000;
-        long interval = Math.round((currentTimeSec-recentVisitPtm)/60/60/24);
+
+        //  앱을 최초 실행 하였을 경우 recentVisitPtm 값은 없으므로 ltvi가 잘못 계살될 수 있음.
+        //  recentVisitPtm가 0보다 크면 interval 계산.
+        int interval = 0;
+        if( recentVisitPtm > 0l ){
+            interval = Math.round((currentTimeSec-recentVisitPtm)/60/60/24);
+        }
+
         int ltvi = documentDB.getInt(StaticValues.PARAM_LTVI);
         ltvi += interval;
         documentDB.putInt(StaticValues.PARAM_LTVI,ltvi);
         documentDB.putLong(StaticValues.PARAM_RECENT_VISIT_PTM, currentTimeSec);
     }
 
+    private void initRecentVisitPTime(){
+        long currentTimeSec = System.currentTimeMillis()/1000;
+        documentDB.putLong(StaticValues.PARAM_RECENT_VISIT_PTM, currentTimeSec);
+    }
+
     private int getUniVt(String visitNew) {
 
         boolean newVisitToday = false;
+        String lastDateString = documentDB.getString(StaticValues.LAST_DATE_STRING);
+
+        long expireTimeForToday = BSUtils.getExpireLongTimeForUniVt(lastDateString, BSUtils.DAILY_UNIQUE);
         boolean newVisitThisWeek = false;
+        long expireTimeForWeek = BSUtils.getExpireLongTimeForUniVt(lastDateString,  BSUtils.WEEKLY_UNIQUE);
         boolean newVisitThisMonth = false;
+        long expireTimeForMonth = BSUtils.getExpireLongTimeForUniVt(lastDateString, BSUtils.MONTHLY_UNIQUE);
+
+        Calendar today = Calendar.getInstance();
+        if( today.getTimeInMillis() > expireTimeForToday  ){
+            newVisitToday = true;
+        }
+        if( today.getTimeInMillis() > expireTimeForWeek ){
+            newVisitThisWeek = true;
+        }
+        if( today.getTimeInMillis() > expireTimeForMonth ){
+            newVisitThisMonth = true;
+        }
+
+        /**
+         전달되는 값의 의미는 다음과 같다.
+         0 값 : 일,주,월 모두에 대하여 순수방문이 아님.
+         1 값 : 일 순수방문만 해당
+         2 값 : 일, 주 순수 방문에 해당
+         3 값 : 일, 주, 월 순수 방문에 해당함.
+         4 값 : 일, 월 순수 방문에 해당함
+         * **/
+        // 신규 세션이 발급된 시점이면,
+        if(visitNew.equalsIgnoreCase("Y")){
+            if( newVisitToday && !newVisitThisWeek  && !newVisitThisMonth){
+                return 1;
+            }else if( newVisitToday && newVisitThisWeek  && !newVisitThisMonth){
+                return 2;
+            }else if( newVisitToday && newVisitThisWeek && newVisitThisMonth ){
+                return 3;
+            }else if( newVisitToday && !newVisitThisWeek  && newVisitThisMonth){
+                return 4;
+            }else{
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+
+        /***
         //현재시간
         Calendar mCalendar = new GregorianCalendar();
-
         int year = mCalendar.get(Calendar.YEAR);
         int month = mCalendar.get(Calendar.MONTH) +1;
         int date = mCalendar.get(Calendar.DATE);
+
         //현재날짜
         String dateString = String.format("%d-%d-%d",year,month,date);
         String lastDateString = documentDB.getString(StaticValues.LAST_DATE_STRING);
+
         if(!dateString.equalsIgnoreCase(lastDateString)){
             //일 순수 방문
             newVisitToday = true;
@@ -520,6 +580,7 @@ public class DocumentManager {
             newVisitThisMonth = true;
             documentDB.putString(StaticValues.LAST_MONTH_STRING,monthString);
         }
+
         //주 순수 방문
         int dayOfWeek = mCalendar.get(Calendar.DAY_OF_WEEK);
         int haveToAdd = 7-dayOfWeek;
@@ -542,6 +603,8 @@ public class DocumentManager {
         }else{
             return 0;
         }
+        ***/
+
 //        return 1;
     }
 

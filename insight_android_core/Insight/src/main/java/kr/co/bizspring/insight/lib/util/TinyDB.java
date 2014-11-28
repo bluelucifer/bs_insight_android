@@ -39,7 +39,7 @@ public class TinyDB {
         try {
             theGottenBitmap = BitmapFactory.decodeFile(path);
         } catch (Exception e) {
-            // TODO: handle exception
+            BSDebugger.log(e,this);
         }
         return theGottenBitmap;
     }
@@ -110,7 +110,6 @@ public class TinyDB {
         try {
             bSuccess1 = saveFile.createNewFile();
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             BSDebugger.log(e1,this);
         }
 
