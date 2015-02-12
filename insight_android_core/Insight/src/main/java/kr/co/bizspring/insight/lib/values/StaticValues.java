@@ -1,5 +1,9 @@
 package kr.co.bizspring.insight.lib.values;
 
+import java.util.HashMap;
+
+import kr.co.bizspring.insight.lib.tracker.Profiler;
+
 /**
  * Created by caspar on 14. 9. 10.
  */
@@ -40,19 +44,44 @@ public class StaticValues {
     public static final String END_VIEW = "end_view";
     public static final String RECENT_ORDER_PTM = "recentOrderPtm";
     public static final String SESSION_FILE_PREFIX = "/SESSION_FILE";
-    public static final String PARAM_PNC_TP = "pncTp";
+    public static final String PARAM_PNC_TP = "pncSubTp";
     public static final String PARAM_MTV = "mtv";
     public static final String START_TIME = "st_time";
     public static final String END_TIME = "ed_time";
     public static final String PARAM_EXTRA = "extra";
+
+    /*
     public static final String LAST_DATE_STRING = "lastDateString";
     public static final String LAST_MONTH_STRING = "lastMonthString";
     public static final String LAST_WEEK_INT = "lastWeekInt";
+    */
+    public static final String PARAM_MAT_UPDATE_TIME = "expireTimeDaily";
+    public static final String EXPIRE_TIME_WEEKLY = "expireTimeWeekly";
+    public static final String EXPIRE_TIME_MONTHLY = "expireTimeMonthly";
+
     public static final String PARAM_REF = "Ref";
+    public static final String RETRY_COUNT = "retryCount";
+    public static final String BS_WEB_TRACKER = "BSTracker";
+    public static final String CREATE_TIME = "createTime";
+    public static final String DEBUG_FLAG = "debugFlag";
+    public static final String BS_CONFIG_DATA_SEND_MODE = "dataSendMode";
+    public static final String BS_CONFIG_MAX_DATA_LIFE_TIME = "maxDataLifeTime";
+    public static final String BS_CONFIG_MAX_DATA_SEND_LENGTH = "maxDataSendLength";
+    public static final String BS_CONFIG_HASH_KEY = "hashKey";
+    public static final String ST_SEND_TIME = "ST_SEND_TIME";
+    public static final String RESPONSE_CODE = "RESPONSE_CODE";
+    public static final String RES001 = "RES001";
+    public static final String RES002 = "RES002";
+    public static final String RES003 = "RES003";
+    public static final String RES004 = "RES004";
+    public static final String LOCK_CODE = "LOCK_CODE";
+    public static final String KEY_DOC_ID = "DOCUMENT_ID";
 
-    public static Boolean BS_MODE_DEBUG = true;
+    public static Boolean BS_MODE_DEBUG = false;
 
-    public static String BS_CONFIG_FILE_NAME = "bs_config.xml";
+    public static String BS_CONFIG_FILE_NAME = "bs_config";
+
+    public static String BS_LOCAL_CONFIG_FILE_NAME = "bs_local_config";
 
     public static String DEBUG_TAG = "BS_INSIGHT_LOGGER";
 
@@ -100,37 +129,77 @@ public class StaticValues {
     public static final String PARAM_UVP3 = "uvp3";
     public static final String PARAM_UVP4 = "uvp4";
     public static final String PARAM_UVP5 = "uvp5";
+
     public static final String PARAM_MAT_SOURCE = "mat_source";
     public static final String PARAM_MAT_MEDIUM = "mat_medium";
     public static final String PARAM_MAT_KWD = "mat_kwd";
     public static final String PARAM_MAT_CAMPAIGN = "mat_campaign";
+    public static final String PARAM_MAT_UPDATE_TIME = "mat_uptime";
+    public static final String PARAM_MAT_UPDATE_SID = "mat_upsid";
+    public static final String PARAM_CONV_TP = "convTp";
+    public static final int MAT_CONVERSION_TP_DIRECT = 0;
+    public static final int MAT_CONVERSION_TP_NON_DIRECT = 1;
+
+
     public static final String PARAM_IAT_SOURCE = "iat_source";
     public static final String PARAM_IAT_MEDIUM = "iat_medium";
     public static final String PARAM_IAT_KWD = "iat_kwd";
     public static final String PARAM_IAT_CAMPAIGN = "iat_campaign";
-    public static final String PARAM_CONV_TP = "convTp";
+
+
+
+
     public static final String PARAM_FB_SOURCE = "fb_source";
+    public static final String PARAM_FB_UPDATE_TIME = "fb_uptime";
+    public static final String PARAM_FB_UPDATE_SID = "fb_upsid";
+
+
     public static final String PARAM_UTM_SOURCE = "utm_source";
     public static final String PARAM_UTM_MEDIUM = "utm_medium";
     public static final String PARAM_UTM_CAMPAIGN = "utm_campaign";
     public static final String PARAM_UTM_TERM = "utm_term";
     public static final String PARAM_UTM_CONTENT = "utm_content";
+    public static final String PARAM_UTM_UPDATE_TIME = "utm_uptime";
+    public static final String PARAM_UTM_UPDATE_SID = "utm_upsid";
+
     public static final String PARAM_GCLID = "gclid";
 
 
 
-    public static String PARAM_AMT = "amt";
-    public static String PARAM_EA = "ea";
-    public static String PARAM_PNC = "pnc";
-    public static String PARAM_PNG = "png";
-    public static String PARAM_VS = "vs";
-    public static String PARAM_CS_P_V = "csPV";
-    public static String PARAM_CP = "cp";
-    public static String PARAM_PI = "pi";
-    public static String PARAM_PNC_NM = "pncNm";
-    public static String PARAM_PNG_NM = "pngNm";
-    public static String PARAM_RECENT_VISIT_PTM = "recentVisitPtm";
+    public static final String PARAM_AMT = "amt";
+    public static final String PARAM_EA = "ea";
+    public static final String PARAM_PNC = "pnc";
+    public static final String PARAM_PNG = "png";
+    public static final String PARAM_VS = "vs";
+    public static final String PARAM_CS_P_V = "csPV";
+    public static final String PARAM_CP = "cp";
+    public static final String PARAM_PI = "pi";
+    public static final String PARAM_PNC_NM = "pncNm";
+    public static final String PARAM_PNG_NM = "pngNm";
+    public static final String PARAM_RECENT_VISIT_PTM = "recentVisitPtm";
     /* 파라미터 목록  종료*/
 
     public static String PREF_INSTALL_DATE = "installDate";
-}
+
+    /*
+    * 2014.11.29 추가 파라미터
+    * **/
+    public static final String PARAM_MVT1 = "mvt1";
+    public static final String PARAM_MVT2 = "mvt2";
+    public static final String PARAM_MVT3 = "mvt3";
+
+    public static final String PARAM_GOAL_1   = "g1";
+    public static final String PARAM_GOAL_2   = "g2";
+    public static final String PARAM_GOAL_3   = "g3";
+    public static final String PARAM_GOAL_4   = "g4";
+    public static final String PARAM_GOAL_5   = "g5";
+    public static final String PARAM_GOAL_6   = "g6";
+    public static final String PARAM_GOAL_7   = "g7";
+    public static final String PARAM_GOAL_8   = "g8";
+    public static final String PARAM_GOAL_9   = "g9";
+    public static final String PARAM_GOAL_10  = "g10";
+
+    public static final String PARAM_GOAL_APP_INSTALL = "g29";
+    public static final String PARAM_GOAL_ACCEPT_PUSH ="g30";
+
+ }

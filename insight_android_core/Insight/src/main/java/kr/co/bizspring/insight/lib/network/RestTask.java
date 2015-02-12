@@ -264,6 +264,7 @@ public class RestTask extends AsyncTask<Void, Void, Void> {
                 return new JSONObject();
             }
         } catch (Exception e) {
+            statusCode = 800;
             BSDebugger.log(e,this);
         }finally{
             try {

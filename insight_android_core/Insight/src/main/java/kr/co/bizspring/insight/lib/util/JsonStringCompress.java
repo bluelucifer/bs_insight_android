@@ -18,24 +18,30 @@ public class JsonStringCompress {
     // 1.Compress
     // #########################################################################################
     public static byte[] compress(String src) throws IOException {
-        String encodeStr = URLEncoder.encode(src, "utf-8");
-        byte[] dataByte = encodeStr.getBytes();
-        Deflater deflater = new Deflater();
-        deflater.setLevel(Deflater.BEST_COMPRESSION);
-        deflater.setInput(dataByte);
-        deflater.finish();
-        ByteArrayOutputStream bao = new ByteArrayOutputStream(dataByte.length);
-        byte[] buf = new byte[1024];
-        int offset = 0;
-        while(!deflater.finished()){
-            int compByte = deflater.deflate(buf);
-            Log.d("BS_COMPRESS_BEFORE_BYTE",buf.toString());
-            bao.write(buf, offset, compByte);
+        byte[] returnByte = null;
+        try {
+            String encodeStr = URLEncoder.encode(src, "utf-8");
+            byte[] dataByte = encodeStr.getBytes();
+            Deflater deflater = new Deflater();
+            deflater.setLevel(Deflater.BEST_COMPRESSION);
+            deflater.setInput(dataByte);
+            deflater.finish();
+            ByteArrayOutputStream bao = new ByteArrayOutputStream(dataByte.length);
+            byte[] buf = new byte[1024];
+            int offset = 0;
+            while(!deflater.finished()){
+                int compByte = deflater.deflate(buf);
+                Log.d("BS_COMPRESS_BEFORE_BYTE",buf.toString());
+                bao.write(buf, offset, compByte);
+            }
+            bao.close();
+            deflater.end();
+            Log.d("BS_BYTE_COMPRESSED",String.valueOf(bao.toByteArray()));
+            returnByte = bao.toByteArray();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        bao.close();
-        deflater.end();
-        Log.d("BS_BYTE_COMPRESSED",String.valueOf(bao.toByteArray()));
-        return bao.toByteArray();
+        return returnByte;
     }
     // #########################################################################################
     // 4.Decompress

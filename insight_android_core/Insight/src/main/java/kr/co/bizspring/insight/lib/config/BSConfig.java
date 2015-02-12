@@ -1,10 +1,11 @@
 package kr.co.bizspring.insight.lib.config;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.XmlResourceParser;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -17,14 +18,10 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.Object;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,10 +34,6 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import kr.co.bizspring.insight.lib.util.Connectivity;
 import kr.co.bizspring.insight.lib.util.BSDebugger;
@@ -76,7 +69,17 @@ public class BSConfig {
 
     private int slotCount;
 
+    private int dataSendMode;
+
     private String targetUri;
+    private int maxDataLifeTime;
+
+    private int maxDataSendLength;
+
+
+    private String hashKey;
+
+
 
     public String getApVr() {
         String version = "1.0";
@@ -92,12 +95,16 @@ public class BSConfig {
     }
 
     public String getOs() {
-        os = Build.VERSION.RELEASE;
+        // api level 코드를 전송해야 함.
+        // os = Build.VERSION.RELEASE;
+        os = String.valueOf(Build.VERSION.SDK_INT);
         return os;
     }
 
     public String getPhone() {
-        phone = Build.MODEL+"/"+Build.PRODUCT;
+        // 모델명만 전송함.
+        // phone = Build.MODEL+"/"+Build.PRODUCT;
+        phone = Build.MODEL;
         return phone;
     }
 
@@ -187,45 +194,9 @@ public class BSConfig {
         cm = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         locale = mContext.getResources().getConfiguration().locale;
 
+        pref = mContext.getSharedPreferences(StaticValues.SHARED_PREFRENCE_NAME,Context.MODE_PRIVATE);
+        parseXml();
         try {
-
-            InputStream istr = mContext.getAssets().open(StaticValues.BS_CONFIG_FILE_NAME);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(istr);
-            Element resource = doc.getDocumentElement();
-
-            NodeList items = resource.getChildNodes();
-            for(int i = 0 ; i < items.getLength(); i++){
-
-                Node node = items.item(i);
-                if(!(node instanceof Element)){
-                    continue;
-                }
-                String itemName = node.getAttributes().getNamedItem("name").getNodeValue();
-                String text = node.getFirstChild().getNodeValue();
-                if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_DEBUG)){
-                    debug = Boolean.parseBoolean(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_CERT_CODE)){
-                    ak = String.valueOf(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_SERVICE_NO)){
-                    pfno = Integer.valueOf(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_SLOT_COUNT)){
-                    slotCount = Integer.valueOf(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_RETURN_VISIT_DATE)){
-                    returnVisitDate = Integer.valueOf(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_TARGET_URI)){
-                    targetUri = String.valueOf(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_REFERER_EXPIRE_DATE)){
-                    refererExpireDate = Integer.valueOf(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_TIMER)){
-                    timer = Integer.valueOf(text);
-                }else if(itemName.equalsIgnoreCase(StaticValues.BS_CONFIG_USE_RETENTION)){
-                    userRetention = Boolean.valueOf(text);
-                }
-            }
-
-            pref = mContext.getSharedPreferences(StaticValues.SHARED_PREFRENCE_NAME,Context.MODE_PRIVATE);
 
             advId = (String) getPrefValue(StaticValues.PARAM_ADVID,String.class);
             if(advId.equalsIgnoreCase("_")){
@@ -248,17 +219,139 @@ public class BSConfig {
                 installDate = currentDateString;
                 putPref(StaticValues.PREF_INSTALL_DATE,installDate);
             }
+        } catch (Exception e) {
+            BSDebugger.log(e,this);
+        }
+    }
+
+    private void parseXml() {
+        ApplicationInfo applicationInfo = mContext.getApplicationInfo();
+        String packageName = applicationInfo.packageName;
+        int xmlId = 0;
+        xmlId = mContext.getResources().getIdentifier(StaticValues.BS_CONFIG_FILE_NAME,"xml",packageName);
+        if(xmlId==0){
+            xmlId = mContext.getResources().getIdentifier(StaticValues.BS_CONFIG_FILE_NAME,"xml","kr.co.bizspring.insight");
+        }
+        XmlResourceParser localConfigXml = mContext.getResources().getXml(xmlId);
+        try {
+            localConfigXml.next();
+            int eventType = localConfigXml.getEventType();
+            String NodeValue;
+            while (eventType != XmlPullParser.END_DOCUMENT)  //Keep going until end of xml document
+            {
+                if(eventType == XmlPullParser.START_DOCUMENT)
+                {
+                    //Start of XML, can check this with myxml.getName() in Log, see if your xml has read successfully
+                }
+                else if(eventType == XmlPullParser.START_TAG)
+                {
+                    NodeValue = localConfigXml.getName();//Start of a Node
+                    if (NodeValue.equalsIgnoreCase("string"))
+                    {
+                        int attributeCount = localConfigXml.getAttributeCount();
+                        for(int i = 0; i < attributeCount ; i++){
+                            String attributeName = localConfigXml.getAttributeName(i);
+                            if(attributeName.equalsIgnoreCase("name")){
+                                String attributeValue = localConfigXml.getAttributeValue(i);
+                                if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_TARGET_URI)) {
+                                    String nextText = localConfigXml.nextText();
+                                    targetUri = String.valueOf(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_CERT_CODE)){
+                                    String nextText = localConfigXml.nextText();
+                                    ak = String.valueOf(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_HASH_KEY)){
+                                    String nextText = localConfigXml.nextText();
+                                    hashKey = String.valueOf(nextText);
+                                }
+                            }
+                        }
+                        // use myxml.getAttributeValue(x); where x is the number
+                        // of the attribute whose data you want to use for this node
+
+                    }else if (NodeValue.equalsIgnoreCase("integer"))
+                    {
+                        int attributeCount = localConfigXml.getAttributeCount();
+                        for(int i = 0; i < attributeCount ; i++){
+                            String attributeName = localConfigXml.getAttributeName(i);
+                            if(attributeName.equalsIgnoreCase("name")){
+                                String attributeValue = localConfigXml.getAttributeValue(i);
+                                if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_SERVICE_NO)){
+                                    String nextText = localConfigXml.nextText();
+                                    pfno = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_SLOT_COUNT)){
+                                    String nextText = localConfigXml.nextText();
+                                    slotCount = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_RETURN_VISIT_DATE)){
+                                    String nextText = localConfigXml.nextText();
+                                    returnVisitDate = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_REFERER_EXPIRE_DATE)){
+                                    String nextText = localConfigXml.nextText();
+                                    refererExpireDate = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_TIMER)){
+                                    String nextText = localConfigXml.nextText();
+                                    timer = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_DATA_SEND_MODE)){
+                                    String nextText = localConfigXml.nextText();
+                                    dataSendMode = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_MAX_DATA_LIFE_TIME)){
+                                    String nextText = localConfigXml.nextText();
+                                    maxDataLifeTime = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_MAX_DATA_SEND_LENGTH)){
+                                    String nextText = localConfigXml.nextText();
+                                    maxDataSendLength = Integer.parseInt(nextText);
+                                }
+                            }
+                        }
+                        // use myxml.getAttributeValue(x); where x is the number
+                        // of the attribute whose data you want to use for this node
+
+                    }else if (NodeValue.equalsIgnoreCase("bool"))
+                    {
+                        int attributeCount = localConfigXml.getAttributeCount();
+                        for(int i = 0; i < attributeCount ; i++){
+                            String attributeName = localConfigXml.getAttributeName(i);
+                            if(attributeName.equalsIgnoreCase("name")){
+                                String attributeValue = localConfigXml.getAttributeValue(i);
+                                if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_USE_RETENTION)) {
+                                    String nextText = localConfigXml.nextText();
+                                    userRetention = Boolean.parseBoolean(nextText);
+                                }else if(attributeValue.equalsIgnoreCase(StaticValues.BS_CONFIG_DEBUG)) {
+                                    String nextText = localConfigXml.nextText();
+                                    debug = Boolean.parseBoolean(nextText);
+                                }else{
+
+                                }
+                            }
+                        }
+                    }else{
+
+                    }
+
+                    if (NodeValue.equalsIgnoreCase("SecondNodeNameType"))
+                    {
+                        // use myxml.getAttributeValue(x); where x is the number
+                        // of the attribute whose data you want to use for this node
+
+                    }
+                    //etc for each node name
+                }
+                else if(eventType == XmlPullParser.END_TAG)
+                {
+                    //End of document
+                }
+                else if(eventType == XmlPullParser.TEXT)
+                {
+                    //Any XML text
+                }
+
+                eventType = localConfigXml.next(); //Get next event from xml parser
+            }
+
+        } catch (XmlPullParserException e) {
+            BSDebugger.log(e, this);
         } catch (IOException e) {
             BSDebugger.log(e,this);
-        } catch (ParserConfigurationException e) {
-            BSDebugger.log(e, this);
-        } catch (SAXException e) {
-            BSDebugger.log(e, this);
         }
-//        catch (Exception e){
-//            BSDebugger.log(e,this);
-//        }
-
     }
 
     void requestUUID(){
@@ -539,15 +632,34 @@ public class BSConfig {
     }
 
     public String getTargetUri() {
-        return targetUri;
+        return (targetUri+"/InsightTrk/mobileForAd.json");
     }
-
+    public String getAliveCheckUri(){ return (targetUri+"/InsightTrk/mobileForHc.json"); }
     public int getReportTime() {
-        int time = BSLocalConfig.getInstance(mContext).getReportTime();
-        return time;
+//        int time = BSLocalConfig.getInstance(mContext).getReportTime();
+        return timer*60;
     }
     public int getSessionTime(){
         int time = BSLocalConfig.getInstance(mContext).getSessionTime();
         return time;
     }
+
+    public int getDataSendMode() {
+        return this.dataSendMode;
+    }
+
+    public boolean getUseRetention() {
+        return userRetention;
+    }
+
+    public int getMaxDataLifeTime(){
+        return this.maxDataLifeTime;
+    }
+    public int getMaxDataSendLength() {
+        return maxDataSendLength;
+    }
+    public String getHashKey() {
+        return hashKey;
+    }
+
 }

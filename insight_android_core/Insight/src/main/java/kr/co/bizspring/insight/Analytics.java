@@ -2,6 +2,8 @@ package kr.co.bizspring.insight;
 
 import android.content.Context;
 
+import kr.co.bizspring.insight.lib.util.BSMap;
+
 /**
  * Created by caspar on 2014. 11. 12..
  * @author caspar
@@ -10,34 +12,6 @@ import android.content.Context;
  * @see kr.co.bizspring.insight.BSTracker
  */
 public class Analytics extends BSTracker {
-
-    /*
-* 입출력 명세서의 변수명으로 사용되는 필드
-* */
-    public final static String GOAL_1   = "g1";
-    public final static String GOAL_2   = "g2";
-    public final static String GOAL_3   = "g3";
-    public final static String GOAL_4   = "g4";
-    public final static String GOAL_5   = "g5";
-    public final static String GOAL_6   = "g6";
-    public final static String GOAL_7   = "g7";
-    public final static String GOAL_8   = "g8";
-    public final static String GOAL_9   = "g9";
-    public final static String GOAL_10  = "g10";
-    public final static String GOAL_APP_INSTALL = "g29";
-    public final static String GOAL_ACCEPT_PUSH ="g30"; // setGoal(Anal.GOAL_ACCEPT_PUSH,"1")
-
-
-    public final static String USER_ATTRIBUTE_1	="uvp1";
-    public final static String USER_ATTRIBUTE_2	="uvp2";
-    public final static String USER_ATTRIBUTE_3	="uvp3";
-    public final static String USER_ATTRIBUTE_4	="uvp4";
-    public final static String USER_ATTRIBUTE_5	="uvp5";
-
-
-    public final static String USER_DEFINE_CUSTOM_TAG_1 = "mvt1";
-    public final static String USER_DEFINE_CUSTOM_TAG_2 = "mvt1";
-    public final static String USER_DEFINE_CUSTOM_TAG_3 = "mvt1";
 
     /*
     * 입출력 명세서의 값으로 사용되는 필드
@@ -60,7 +34,6 @@ public class Analytics extends BSTracker {
     public final static String GENDER_MALE ="M";
     public final static String GENDER_FEMALE ="F";
     public final static String GENDER_ETC ="U";
-
 
     public final static String AGE_0_TO_9	="A";
     public final static String AGE_10_TO_19	="B";
@@ -97,7 +70,7 @@ public class Analytics extends BSTracker {
      * @see kr.co.bizspring.insight.BSTracker
      * @param mContext (Context/Activity/Service) 등등
      */
-    public void init(Context mContext){
-        super.init(mContext);
+    public BSTracker init(Context mContext){
+        return super.init(mContext);
     }
 }

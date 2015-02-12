@@ -33,7 +33,16 @@ public class BSSession {
         sessionDB = new TinyDB(context,"BS_SESSION");
         sessionMap = new HashMap<String, TinyDB>();
         sessions = sessionDB.getList(SESSIONS);
-        //todo 2개만 담도록 수정
+
+        //세션의 수가 2보다 크면 2개가 남을 때 까지 세션 정보를 비운다.
+        if(sessions.size()>2){
+            while (sessions.size()>2){
+                String sessionID = sessions.get(0);
+                sessions.remove(0);
+                new TinyDB(context,sessionID).clear();
+            }
+        }
+
         for(int i = 0 ; i < sessions.size();i++){
             String session = sessions.get(i);
             sessionMap.put(session,new TinyDB(context,session));
@@ -61,7 +70,8 @@ public class BSSession {
         String sid = getSession(flagEvt);
         TinyDB lastSession = sessionMap.get(sid);
         Long lastTime = lastSession.getLong(LAST_VISIT_NAME);
-        return sid+":"+String.valueOf(lastTime);
+//        return sid+":"+String.valueOf(lastTime);
+        return sid;//+":"+String.valueOf(lastTime);
     }
 
     public String getSession(boolean flagEvt){
@@ -114,11 +124,26 @@ public class BSSession {
         return sessionDB.getString("lastSessionID");
     }
 
-    public String getVisitNew(){
+    //todo DocumentID 기반으로 세션 최신성 체크 - fin
+    
+    public String getVisitNew(String documentId){
         String lastSessionID = getLastSessionID();
         String currentSessionID = getSession(false);
         if(!lastSessionID.equalsIgnoreCase(currentSessionID)){
-            return "Y";
+            TinyDB db = sessionMap.get(currentSessionID);
+            String documentKeyId = db.getString(StaticValues.KEY_DOC_ID);
+                //키가 되는 도큐먼트 아이디가 없으면 신규 세션이므로 Y
+            if(documentKeyId.equalsIgnoreCase("")){
+                db.putString(StaticValues.KEY_DOC_ID,documentId);
+                return "Y";
+                //신규 세션 정보를 저장해 두었다가 키 값과 매치가 되면 신규 세션에 해당하는 문서이므로 Y
+            }else if(documentKeyId.equalsIgnoreCase(documentId)){
+                return "Y";
+            }else{
+                //신규 세션이긴 하지만 도큐먼트 키값이 다르므로 시차의 오류가 있는 것.
+                //이전의 도큐먼트가 정상 값이므로 N
+                return "N";
+            }
         }else{
             return "N";
         }

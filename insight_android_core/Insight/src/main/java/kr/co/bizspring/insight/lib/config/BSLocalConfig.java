@@ -19,6 +19,8 @@ public class BSLocalConfig {
     Context mContext = null;
     private int reportTime = 300;
     private int sessionTime = 1800;
+    private int alarmTime = 60*60*24;
+    private int retryTime = 5*60;
     private BSLocalConfig(Context _context){
         mContext = _context;
         init();
@@ -65,6 +67,12 @@ public class BSLocalConfig {
                                 }else if(attributeValue.equalsIgnoreCase("sessionTime")){
                                     String nextText = localConfigXml.nextText();
                                     sessionTime = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase("alarmTime")){
+                                    String nextText = localConfigXml.nextText();
+                                    alarmTime = Integer.parseInt(nextText);
+                                }else if(attributeValue.equalsIgnoreCase("retryTime")){
+                                    String nextText = localConfigXml.nextText();
+                                    retryTime = Integer.parseInt(nextText);
                                 }
                             }
                         }
@@ -106,5 +114,13 @@ public class BSLocalConfig {
     }
     public int getSessionTime(){
         return sessionTime;
+    }
+
+    public long getAlarmScheduleTime() {
+        return alarmTime;
+    }
+
+    public int getRetryTime() {
+        return retryTime;
     }
 }

@@ -1,7 +1,14 @@
 package kr.co.bizspring.insight.lib.util;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+
+import kr.co.bizspring.insight.lib.config.BSConfig;
+import kr.co.bizspring.insight.lib.values.SignalIndex;
 import kr.co.bizspring.insight.lib.values.StaticValues;
 
 /**
@@ -57,4 +64,24 @@ public class BSDebugger {
         return isDebug();
     }
 
+    public static void logAsync(final Context mContext, final String message) {
+        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                BSConfig config = BSConfig.getInstance(mContext);
+                Boolean debugFlag = (Boolean) config.getPrefValue(StaticValues.DEBUG_FLAG,Boolean.class);
+                if(debugFlag){
+                    SimpleDateFormat sdf=new SimpleDateFormat("[yyyy-MM-dd / HH:mm:ss ] ");
+                    Long tempTime = System.currentTimeMillis();
+                    sdf.format(tempTime);
+                    Intent intent = new Intent();
+                    intent.setAction(SignalIndex.LOG_DEBUG);
+                    intent.putExtra("message",sdf.format(tempTime)+message);
+                    mContext.sendBroadcast(intent);
+                }
+                return null;
+            }
+        };
+        task.execute();
+    }
 }

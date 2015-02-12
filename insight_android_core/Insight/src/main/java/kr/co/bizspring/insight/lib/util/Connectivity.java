@@ -11,18 +11,25 @@ import android.telephony.TelephonyManager;
  */
 public class Connectivity {
 
+    private static String NETWORK_TP_NOT_WIFI = "1";
+    private static String NETWORK_TP_WIFI = "2";
     public static String getNetworkType(Context context){
+        /*
+        * 3g/4g 일경우 1을 반환
+        * wifi 일경우 2를 반환
+        * 인터넷 연결이 안되는 경우 3g/4g로 식별함.
+        * */
         if(isConnectedWifi(context)){
-            return "wifi";
+            return Connectivity.NETWORK_TP_WIFI; // return "wifi";
         }
         if(isConnectedMobile(context)){
             if(isConnectedFast(context)){
-                return "4g";
+                return Connectivity.NETWORK_TP_NOT_WIFI;// return "4g";
             }else{
-                return "3g";
+                return Connectivity.NETWORK_TP_NOT_WIFI;// return "3g";
             }
         }
-        return "nostate";
+        return Connectivity.NETWORK_TP_NOT_WIFI;// return "nostate";
     }
 
     /**

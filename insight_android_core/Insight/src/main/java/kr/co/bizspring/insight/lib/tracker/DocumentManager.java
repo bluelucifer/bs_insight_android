@@ -19,12 +19,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import kr.co.bizspring.insight.lib.config.BSConfig;
+import kr.co.bizspring.insight.lib.config.BSLocalConfig;
 import kr.co.bizspring.insight.lib.util.Connectivity;
 import kr.co.bizspring.insight.lib.util.TinyDB;
 import kr.co.bizspring.insight.lib.network.CallBackInterface;
@@ -83,7 +88,7 @@ public class DocumentManager {
         }else{
             String documentID = documetNameList.get(documetNameList.size() - 1);
             //새로운 세션이면 새 문서를 만든다.
-            if(sessionManager.getVisitNew().equalsIgnoreCase("Y")){
+            if(sessionManager.getVisitNew(documentID).equalsIgnoreCase("Y")){
                 currentDocument = createDocument();
             }else{
                 //새로운 세션이 아니면 기존의 문서를 불러온다.
@@ -115,8 +120,14 @@ public class DocumentManager {
     /**
      * 도큐먼트 발송 메소드
      */
+
+//    int sendRcount = 0;
     boolean sendLock = false;
     public void sendDocumet(){
+        String rCode = (String)BSConfig.getInstance(mContext).getPrefValue(StaticValues.RESPONSE_CODE,String.class);
+        if(!profiler.shouldSend(true)){
+            return;
+        }
         if(sendLock){
             return;
         }
@@ -124,7 +135,7 @@ public class DocumentManager {
         //네트워크 사용이 가능할 때
         if(Connectivity.isConnected(mContext)){
             if(documetNameList.size()>0){
-                String target = sessionManager.getConfig().getTargetUri();
+                final String target = sessionManager.getConfig().getTargetUri();
                 String documentID = documetNameList.get(0);
                 FileInputStream inputStream = null;
                 try {
@@ -144,22 +155,43 @@ public class DocumentManager {
                     }
                     final JSONObject document = new JSONObject(jsonString);
 
-                    document.put(TrackType.TYPE_GOAL.toString(),getQueue(StaticValues.GOAL_FILE_PREFIX,documentID));
-                    document.put(TrackType.TYPE_PAGES.toString(),mergePages(getQueue(StaticValues.PAGES_FILE_PREFIX, documentID)));
+                    //생성 시간 기준으로 maxTime이 지난 문서는 삭제하고 다음을 보냄.
+                    long createTime = document.getJSONObject(TrackType.TYPE_SESSION.toString()).getLong(StaticValues.CREATE_TIME);
+                    long currentTime = System.currentTimeMillis();
+                    long diff = currentTime - createTime;
+                    long ruleTime = BSConfig.getInstance(mContext).getMaxDataLifeTime()*60*60*1000;
+                    if(diff>ruleTime){
+                        nextSendDocument();
+                        return;
+                    }
+                    if(document.has(StaticValues.RETRY_COUNT)){
+                        int rCount = document.getInt(StaticValues.RETRY_COUNT);
+                        rCount++;
+                        document.put(StaticValues.RETRY_COUNT,rCount);
+                        if(rCount>5){
+                            nextSendDocument();
+                            return;
+                        }
+                    }else {
+                        document.put(TrackType.TYPE_GOAL.toString(), getQueue(StaticValues.GOAL_FILE_PREFIX, documentID));
+                        document.put(TrackType.TYPE_PAGES.toString(), mergePages(getQueue(StaticValues.PAGES_FILE_PREFIX, documentID)));
 
-                    document.put(TrackType.TYPE_REVENUE.toString(),getQueue(StaticValues.REVENUE_FILE_PREFIX,documentID));
-                    document.put(TrackType.TYPE_EVENT.toString(),getQueue(StaticValues.EVENT_FILE_PREFIX,documentID));
-                    document.put(TrackType.TYPE_CAMPAIGN.toString(),getQueue(StaticValues.CAMPAIGN_FILE_PREFIX,documentID));
-                    document.put(TrackType.TYPE_VIEW.toString(),getQueue(StaticValues.VIEW_FILE_PREFIX,documentID));
+                        document.put(TrackType.TYPE_REVENUE.toString(), getQueue(StaticValues.REVENUE_FILE_PREFIX, documentID));
+//                        document.put(TrackType.TYPE_EVENT.toString(), getQueue(StaticValues.EVENT_FILE_PREFIX, documentID));
+//                        document.put(TrackType.TYPE_CAMPAIGN.toString(), getQueue(StaticValues.CAMPAIGN_FILE_PREFIX, documentID));
+//                        document.put(TrackType.TYPE_VIEW.toString(), getQueue(StaticValues.VIEW_FILE_PREFIX, documentID));
+                        document.put(StaticValues.RETRY_COUNT,1);
+                    }
+                    requestSave(documentID,document);
                     boolean sendFlag = false;
                     if(document.getJSONObject(TrackType.TYPE_SESSION.toString()).getString(StaticValues.PARAM_VISIT_NEW).equalsIgnoreCase("Y")){
                         sendFlag = true;
                     }else if(document.getJSONArray(TrackType.TYPE_GOAL.toString()).length()!=0||
                             document.getJSONArray(TrackType.TYPE_PAGES.toString()).length()!=0||
-                            document.getJSONArray(TrackType.TYPE_REVENUE.toString()).length()!=0||
-                            document.getJSONArray(TrackType.TYPE_EVENT.toString()).length()!=0||
-                            document.getJSONArray(TrackType.TYPE_CAMPAIGN.toString()).length()!=0||
-                            document.getJSONArray(TrackType.TYPE_VIEW.toString()).length()!=0
+                            document.getJSONArray(TrackType.TYPE_REVENUE.toString()).length()!=0
+//                            document.getJSONArray(TrackType.TYPE_EVENT.toString()).length()!=0||
+//                            document.getJSONArray(TrackType.TYPE_CAMPAIGN.toString()).length()!=0||
+//                            document.getJSONArray(TrackType.TYPE_VIEW.toString()).length()!=0
                             ){
                         sendFlag = true;
                     }
@@ -168,18 +200,26 @@ public class DocumentManager {
                             @Override
                             public void toDoInBackground(JSONObject o) throws JSONException {
                                 sendLock = false;
+                                boolean failCheck = profiler.updateResponse(o);
+                                if(failCheck){
+                                    TimerTask timerTask = new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            sendDocumet();
+                                        }
+                                    };
+                                    Timer timer = new Timer();
+                                    timer.schedule(timerTask, BSLocalConfig.getInstance(mContext).getRetryTime()*1000);
+                                    return;
+                                }
                                 try {
                                     if(documetNameList.isEmpty()){
                                         currentDocument = createDocument();
                                         return;
                                     }else{
-                                        documetNameList.remove(0);
-                                        documentDB.putList(DOCUMENT_TARGET_NAME,documetNameList);
-                                        if(documetNameList.isEmpty()){
-                                            currentDocument = createDocument();
-                                        }else{
-                                            sendDocumet();
-                                        }
+                                        //최소한 하나의 도큐먼트가 있어야 트래커가 기록한다.
+                                        //이를 위해서 발송하기 전에 하나의 도큐먼트를 빌드해둠.
+                                        nextSendDocument();
                                     }
                                 }catch (Exception e){
                                     BSDebugger.log(e,this);
@@ -189,26 +229,19 @@ public class DocumentManager {
                             @Override
                             public void onErrorCodefind(int statusCode, String statusString) {
                                 sendLock = false;
+                                sendDocumet();
                                 BSDebugger.log(statusString);
                             }
                         });
                         sendLock = true;
                         task.execute();
                     }else{
-                        documetNameList.remove(0);
-                        documentDB.putList(DOCUMENT_TARGET_NAME,documetNameList);
-                        if(documetNameList.isEmpty()){
-                            currentDocument = createDocument();
-                        }else{
-                            sendDocumet();
-                        }
+                        nextSendDocument();
                     }
 
                 } catch (Exception e) {
                     //읽는데 문제가 있으면 삭제하고 다시 시작.
-                    documetNameList.remove(0);
-                    documentDB.putList(DOCUMENT_TARGET_NAME,documetNameList);
-                    sendDocumet();
+                    nextSendDocument();
                     BSDebugger.log(e,DocumentManager.this);
                 }
             }else{
@@ -217,11 +250,41 @@ public class DocumentManager {
         }
     }
 
+    private void nextSendDocument(){
+        if(documetNameList.size()>0){
+            String recentSentDocumentID = documetNameList.get(0);
+            documetNameList.remove(0);
+            documentDB.putList(DOCUMENT_TARGET_NAME,documetNameList);
+            removeSentDocumnet(recentSentDocumentID);
+            if(documetNameList.isEmpty()){
+                currentDocument = createDocument();
+            }else{
+                sendDocumet();
+            }
+        }
+    }
+    private void removeSentDocumnet(String documentID) {
+        //삭제 목록
+        //골, 페이지, 레비뉴, 도큐먼트 원본
+        try {
+            File f = new File(mContext.getFilesDir().getPath()+StaticValues.GOAL_FILE_PREFIX+documentID);
+            f.delete();
+            f = new File(mContext.getFilesDir().getPath()+StaticValues.PAGES_FILE_PREFIX+documentID);
+            f.delete();
+            f = new File(mContext.getFilesDir().getPath()+StaticValues.REVENUE_FILE_PREFIX+documentID);
+            f.delete();
+            f = new File(mContext.getFilesDir().getPath()+"/"+documentID);
+            f.delete();
+        } catch (Exception e) {
+            BSDebugger.log(e,this);
+        }
+    }
+
     private JSONArray mergePages(JSONArray queue) {
         JSONArray target = new JSONArray();
         String globalVtTz = documentDB.getString(StaticValues.PARAM_VT_TZ);
         if(globalVtTz.length()==0){
-            globalVtTz = BSConfig.getCurrentDateString();
+                 globalVtTz = BSConfig.getCurrentDateString();
         }
         int globalVS = documentDB.getInt(StaticValues.PARAM_VS);
         int globalCsPv = documentDB.getInt(StaticValues.PARAM_CS_P_V);
@@ -304,25 +367,24 @@ public class DocumentManager {
         }
         return sessionJson;
     }
-    private JSONObject putSessionDefault(JSONObject sessionJson){
+    private JSONObject putSessionDefault(JSONObject sessionJson,String documentId){
         try {
-            String visitNew =sessionManager.getVisitNew();
+            String visitNew =sessionManager.getVisitNew(documentId);
             int ltvt = documentDB.getInt(StaticValues.PARAM_LTVT);
             if(visitNew.equalsIgnoreCase("Y")){
                 //신규 방문 시 이벤트 처리
                 ltvt++;
                 documentDB.putInt(StaticValues.PARAM_LTVT,ltvt);
-//                long recentVisitPtm = documentDB.getLong(StaticValues.PARAM_RECENT_VISIT_PTM);
-//                long currentTimeSec = System.currentTimeMillis()/1000;
                 if(ltvt==1){
-                    initRecentVisitPTime();
+//                    initRecentVisitPTime();
                     profiler.initOrderPTime();
+                    // mat 리퍼러가 존재할 경우 , 이 값을 인스톨 리퍼러로 저장시켜준다.
+                    profiler.setInstallReferrer();
                 }
                 updateLtvi();
                 updateUdVt();
             }else{
             }
-
             sessionJson.put(StaticValues.PARAM_RESPONSE_TP,"json");
             sessionJson.put(StaticValues.PARAM_LTVT, ltvt);
             sessionJson.put(StaticValues.PARAM_SID,sessionManager.getSid(false));
@@ -336,51 +398,81 @@ public class DocumentManager {
 
         return sessionJson;
     }
-    private JSONObject createDocument() {
+    private JSONObject putAdProfile(JSONObject sessionJson) {
+        //광고 이벤트
+        try {
+            sessionJson.put(StaticValues.PARAM_MAT_SOURCE, profiler.getSessionStringData(StaticValues.PARAM_MAT_SOURCE));
+            sessionJson.put(StaticValues.PARAM_MAT_MEDIUM,profiler.getSessionStringData(StaticValues.PARAM_MAT_MEDIUM));
+            sessionJson.put(StaticValues.PARAM_MAT_KWD,profiler.getSessionStringData(StaticValues.PARAM_MAT_KWD));
+            sessionJson.put(StaticValues.PARAM_MAT_CAMPAIGN,profiler.getSessionStringData(StaticValues.PARAM_MAT_CAMPAIGN));
+
+            //광고 설치
+            sessionJson.put(StaticValues.PARAM_IAT_SOURCE,profiler.getSessionStringData(StaticValues.PARAM_IAT_SOURCE));
+            sessionJson.put(StaticValues.PARAM_IAT_MEDIUM,profiler.getSessionStringData(StaticValues.PARAM_IAT_MEDIUM));
+            sessionJson.put(StaticValues.PARAM_IAT_KWD,profiler.getSessionStringData(StaticValues.PARAM_IAT_KWD));
+            sessionJson.put(StaticValues.PARAM_IAT_CAMPAIGN,profiler.getSessionStringData(StaticValues.PARAM_IAT_CAMPAIGN));
+
+            sessionJson.put(StaticValues.PARAM_CONV_TP,profiler.getSessionIntegerData(StaticValues.PARAM_CONV_TP));
+
+            sessionJson.put(StaticValues.PARAM_FB_SOURCE,profiler.getSessionStringData(StaticValues.PARAM_FB_SOURCE));
+
+            sessionJson.put(StaticValues.PARAM_UTM_CAMPAIGN,profiler.getSessionStringData(StaticValues.PARAM_UTM_CAMPAIGN));
+            sessionJson.put(StaticValues.PARAM_UTM_CONTENT,profiler.getSessionStringData(StaticValues.PARAM_UTM_CONTENT));
+            sessionJson.put(StaticValues.PARAM_UTM_MEDIUM,profiler.getSessionStringData(StaticValues.PARAM_UTM_MEDIUM));
+            sessionJson.put(StaticValues.PARAM_UTM_SOURCE,profiler.getSessionStringData(StaticValues.PARAM_UTM_SOURCE));
+            sessionJson.put(StaticValues.PARAM_UTM_TERM,profiler.getSessionStringData(StaticValues.PARAM_UTM_TERM));
+            sessionJson.put(StaticValues.PARAM_GCLID,profiler.getSessionStringData(StaticValues.PARAM_GCLID));
+        } catch (JSONException e) {
+            BSDebugger.log(e,this);
+        }
+        return sessionJson;
+    }
+    private JSONObject putSessionInitData(JSONObject sessionJson) {
+        try {
+            // mvt 값
+            sessionJson.put(StaticValues.PARAM_MVT1, profiler.getSessionStringData(StaticValues.PARAM_MVT1));
+            sessionJson.put(StaticValues.PARAM_MVT2, profiler.getSessionStringData(StaticValues.PARAM_MVT2));
+            sessionJson.put(StaticValues.PARAM_MVT3, profiler.getSessionStringData(StaticValues.PARAM_MVT3));
+
+        }catch (JSONException e) {
+            BSDebugger.log(e,this);
+        }
+        return sessionJson;
+    }
+    public JSONObject updateDocument(){
+        try {
+            JSONObject sessionJson = currentDocument.getJSONObject(TrackType.TYPE_SESSION.toString());
+            sessionJson = putSessionDefault(sessionJson,getLastDocumentID(mContext)); // ltvt
+            sessionJson = putSessionDBDefault(sessionJson); // ltvi, udvt
+            sessionJson = putSessionProfile(sessionJson); // udrvncm, ltrvnc, ltrvni
+            sessionJson = putAdProfile(sessionJson);
+            currentDocument.put(TrackType.TYPE_SESSION.toString(),sessionJson);
+            requestSave(getLaistDocId(),currentDocument);
+        } catch (JSONException e) {
+            BSDebugger.log(e,this);
+        }
+        return currentDocument;
+    }
+    public JSONObject createDocument() {
         //문서의 명명 규칙 : 세션ID_timestamp.json
         //문서를 생성하고 저장한 후
+        String documentID = sessionManager.getSession(false)+"_"+String.valueOf(System.currentTimeMillis());
+
         JSONObject toCreateJson = new JSONObject();
         try {
             JSONObject sessionJson = getSessionConfigJson();
-            sessionJson = putSessionDefault(sessionJson);
-            sessionJson = putSessionDBDefault(sessionJson);
-            sessionJson = putSessionProfile(sessionJson);
-
-
-
-            //광고 이벤트
-            sessionJson.put(StaticValues.PARAM_MAT_SOURCE,documentDB.getString(StaticValues.PARAM_MAT_SOURCE));
-            sessionJson.put(StaticValues.PARAM_MAT_MEDIUM,documentDB.getString(StaticValues.PARAM_MAT_MEDIUM));
-            sessionJson.put(StaticValues.PARAM_MAT_KWD,documentDB.getString(StaticValues.PARAM_MAT_KWD));
-            sessionJson.put(StaticValues.PARAM_MAT_CAMPAIGN,documentDB.getString(StaticValues.PARAM_MAT_CAMPAIGN));
-
-            //광고 설치
-            sessionJson.put(StaticValues.PARAM_IAT_SOURCE,documentDB.getString(StaticValues.PARAM_IAT_SOURCE));
-            sessionJson.put(StaticValues.PARAM_IAT_MEDIUM,documentDB.getString(StaticValues.PARAM_IAT_MEDIUM));
-            sessionJson.put(StaticValues.PARAM_IAT_KWD,documentDB.getString(StaticValues.PARAM_IAT_KWD));
-            sessionJson.put(StaticValues.PARAM_IAT_CAMPAIGN,documentDB.getString(StaticValues.PARAM_IAT_CAMPAIGN));
-
-            //todo 전환타입
-            sessionJson.put(StaticValues.PARAM_CONV_TP,getConvTp());
-
-            //todo facebook
-            sessionJson.put(StaticValues.PARAM_UD_RVNC,profiler.getFbSource());
-
-            //todo GDN 데이터
-            sessionJson.put(StaticValues.PARAM_UTM_CAMPAIGN,documentDB.getString(StaticValues.PARAM_UTM_CAMPAIGN));
-            sessionJson.put(StaticValues.PARAM_UTM_CONTENT,documentDB.getString(StaticValues.PARAM_UTM_CONTENT));
-            sessionJson.put(StaticValues.PARAM_UTM_MEDIUM,documentDB.getString(StaticValues.PARAM_UTM_MEDIUM));
-            sessionJson.put(StaticValues.PARAM_UTM_SOURCE,documentDB.getString(StaticValues.PARAM_UTM_SOURCE));
-            sessionJson.put(StaticValues.PARAM_UTM_TERM,documentDB.getString(StaticValues.PARAM_UTM_TERM));
-            sessionJson.put(StaticValues.PARAM_GCLID,documentDB.getString(StaticValues.PARAM_GCLID));
-
+            sessionJson = putSessionDefault(sessionJson,documentID); // ltvt
+            sessionJson = putSessionDBDefault(sessionJson); // ltvi, udvt
+            sessionJson = putSessionProfile(sessionJson); // udrvncm, ltrvnc, ltrvni
+            sessionJson = putAdProfile(sessionJson);
+            sessionJson = putSessionInitData(sessionJson);
+            sessionJson.put(StaticValues.CREATE_TIME,String.valueOf(System.currentTimeMillis()));
             toCreateJson.put(TrackType.TYPE_SESSION.toString(),sessionJson);
 
         } catch (JSONException e) {
             BSDebugger.log(e,this);
         }
 
-        String documentID = sessionManager.getSession(false)+"_"+String.valueOf(System.currentTimeMillis());
         saveFile(documentID,toCreateJson);
         documetNameList.add(documentID);
         documentDB.putList(DOCUMENT_TARGET_NAME,documetNameList);
@@ -465,10 +557,6 @@ public class DocumentManager {
             BSDebugger.log(e,DocumentManager.this);
         }
     }
-    private int getConvTp() {
-        //todo 만들어야함.
-        return 0;
-    }
 
     private void updateUdVt() {
         int returnVisitDate = sessionManager.getConfig().getReturnVisitDate();
@@ -497,40 +585,51 @@ public class DocumentManager {
         if( recentVisitPtm > 0l ){
             interval = Math.round((currentTimeSec-recentVisitPtm)/60/60/24);
         }
-
         int ltvi = documentDB.getInt(StaticValues.PARAM_LTVI);
         ltvi += interval;
         documentDB.putInt(StaticValues.PARAM_LTVI,ltvi);
-        documentDB.putLong(StaticValues.PARAM_RECENT_VISIT_PTM, currentTimeSec);
     }
 
-    private void initRecentVisitPTime(){
-        long currentTimeSec = System.currentTimeMillis()/1000;
-        documentDB.putLong(StaticValues.PARAM_RECENT_VISIT_PTM, currentTimeSec);
-    }
+//    private void initRecentVisitPTime(){
+//        long currentTimeSec = System.currentTimeMillis()/1000;
+//        documentDB.putLong(StaticValues.PARAM_RECENT_VISIT_PTM, currentTimeSec);
+//    }
 
     private int getUniVt(String visitNew) {
 
         boolean newVisitToday = false;
-        String lastDateString = documentDB.getString(StaticValues.LAST_DATE_STRING);
-
-        long expireTimeForToday = BSUtils.getExpireLongTimeForUniVt(lastDateString, BSUtils.DAILY_UNIQUE);
-        boolean newVisitThisWeek = false;
-        long expireTimeForWeek = BSUtils.getExpireLongTimeForUniVt(lastDateString,  BSUtils.WEEKLY_UNIQUE);
         boolean newVisitThisMonth = false;
-        long expireTimeForMonth = BSUtils.getExpireLongTimeForUniVt(lastDateString, BSUtils.MONTHLY_UNIQUE);
+        boolean newVisitThisWeek = false;
 
+        long recentVisitPtm =  documentDB.getLong(StaticValues.PARAM_RECENT_VISIT_PTM);
         Calendar today = Calendar.getInstance();
-        if( today.getTimeInMillis() > expireTimeForToday  ){
+        if( recentVisitPtm <= 0  ){
             newVisitToday = true;
-        }
-        if( today.getTimeInMillis() > expireTimeForWeek ){
-            newVisitThisWeek = true;
-        }
-        if( today.getTimeInMillis() > expireTimeForMonth ){
             newVisitThisMonth = true;
+            newVisitThisWeek = true;
+        }else{
+            if( today.getTimeInMillis() > documentDB.getLong(StaticValues.EXPIRE_TIME_DAILY)  ){
+                newVisitToday = true;
+            }
+            if( today.getTimeInMillis() >  documentDB.getLong(StaticValues.EXPIRE_TIME_WEEKLY)  ){
+                newVisitThisWeek = true;
+            }
+            if( today.getTimeInMillis() >  documentDB.getLong(StaticValues.EXPIRE_TIME_MONTHLY)  ){
+                newVisitThisMonth = true;
+            }
         }
+        // expire time 저장.
+        long expireTimeForToday = BSUtils.getExpireLongTimeForUniVt(System.currentTimeMillis()/1000, BSUtils.DAILY_UNIQUE);
+        documentDB.putLong(StaticValues.EXPIRE_TIME_DAILY,expireTimeForToday);
 
+        long expireTimeForWeek = BSUtils.getExpireLongTimeForUniVt(System.currentTimeMillis()/1000,  BSUtils.WEEKLY_UNIQUE);
+        documentDB.putLong(StaticValues.EXPIRE_TIME_WEEKLY,expireTimeForWeek);
+
+        long expireTimeForMonth = BSUtils.getExpireLongTimeForUniVt(System.currentTimeMillis()/1000, BSUtils.MONTHLY_UNIQUE);
+        documentDB.putLong(StaticValues.EXPIRE_TIME_MONTHLY,expireTimeForMonth);
+
+        long currentTimeSec = System.currentTimeMillis()/1000;
+        documentDB.putLong(StaticValues.PARAM_RECENT_VISIT_PTM, currentTimeSec);
         /**
          전달되는 값의 의미는 다음과 같다.
          0 값 : 일,주,월 모두에 대하여 순수방문이 아님.
@@ -538,7 +637,7 @@ public class DocumentManager {
          2 값 : 일, 주 순수 방문에 해당
          3 값 : 일, 주, 월 순수 방문에 해당함.
          4 값 : 일, 월 순수 방문에 해당함
-         * **/
+         ***/
         // 신규 세션이 발급된 시점이면,
         if(visitNew.equalsIgnoreCase("Y")){
             if( newVisitToday && !newVisitThisWeek  && !newVisitThisMonth){
@@ -555,7 +654,6 @@ public class DocumentManager {
         }else{
             return 0;
         }
-
         /***
         //현재시간
         Calendar mCalendar = new GregorianCalendar();
@@ -604,7 +702,6 @@ public class DocumentManager {
             return 0;
         }
         ***/
-
 //        return 1;
     }
 
@@ -615,28 +712,28 @@ public class DocumentManager {
         return instance;
     }
 
-    public void putInstallData(HashMap<String, String> map) {
+    public void putInstallData(Map<String, String> map) {
         try {
             if(map.containsKey(StaticValues.PARAM_UTM_CAMPAIGN)) {
                 //GDN 이벤트 등록
-                documentDB.putString(StaticValues.PARAM_UTM_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
-                documentDB.putString(StaticValues.PARAM_UTM_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
-                documentDB.putString(StaticValues.PARAM_UTM_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
-                documentDB.putString(StaticValues.PARAM_UTM_TERM, map.get(StaticValues.PARAM_UTM_TERM));
-                documentDB.putString(StaticValues.PARAM_UTM_CONTENT, map.get(StaticValues.PARAM_UTM_CONTENT));
-                documentDB.putString(StaticValues.PARAM_GCLID, map.get(StaticValues.PARAM_GCLID));
+                profiler.putSessionData(StaticValues.PARAM_UTM_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
+                profiler.putSessionData(StaticValues.PARAM_UTM_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
+                profiler.putSessionData(StaticValues.PARAM_UTM_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
+                profiler.putSessionData(StaticValues.PARAM_UTM_TERM, map.get(StaticValues.PARAM_UTM_TERM));
+                profiler.putSessionData(StaticValues.PARAM_UTM_CONTENT, map.get(StaticValues.PARAM_UTM_CONTENT));
+                profiler.putSessionData(StaticValues.PARAM_GCLID, map.get(StaticValues.PARAM_GCLID));
 
                 //광고분석 데이터 등록
-                documentDB.putString(StaticValues.PARAM_MAT_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
-                documentDB.putString(StaticValues.PARAM_MAT_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
-                documentDB.putString(StaticValues.PARAM_MAT_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
-                documentDB.putString(StaticValues.PARAM_MAT_KWD, map.get(StaticValues.PARAM_UTM_TERM));
+                profiler.putSessionData(StaticValues.PARAM_MAT_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
+                profiler.putSessionData(StaticValues.PARAM_MAT_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
+                profiler.putSessionData(StaticValues.PARAM_MAT_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
+                profiler.putSessionData(StaticValues.PARAM_MAT_KWD, map.get(StaticValues.PARAM_UTM_TERM));
 
                 //설치 광고 데이터 등록
-                documentDB.putString(StaticValues.PARAM_IAT_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
-                documentDB.putString(StaticValues.PARAM_IAT_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
-                documentDB.putString(StaticValues.PARAM_IAT_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
-                documentDB.putString(StaticValues.PARAM_IAT_KWD, map.get(StaticValues.PARAM_UTM_TERM));
+                profiler.putSessionData(StaticValues.PARAM_IAT_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
+                profiler.putSessionData(StaticValues.PARAM_IAT_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
+                profiler.putSessionData(StaticValues.PARAM_IAT_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
+                profiler.putSessionData(StaticValues.PARAM_IAT_KWD, map.get(StaticValues.PARAM_UTM_TERM));
             }
         } catch (Exception e) {
             BSDebugger.log(e,this);

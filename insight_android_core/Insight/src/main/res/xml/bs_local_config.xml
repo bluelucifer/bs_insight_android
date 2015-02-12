@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <config xmlns:android="http://schemas.android.com/apk/res/android">
+    <integer name="reportTime">30</integer><!-- seconds -->
+    <integer name="sessionTime">1800</integer><!-- seconds -->
+<!--    <integer name="alarmTime">60</integer> --><!-- seconds -->
+    <integer name="retryTime">300</integer><!-- seconds -->
+    <integer name="alarmTime">86400</integer><!-- seconds -->
 
 </config>

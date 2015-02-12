@@ -2,7 +2,14 @@ package kr.co.bizspring.insight.lib.tracker;
 
 import android.content.Context;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import kr.co.bizspring.insight.lib.config.BSConfig;
+import kr.co.bizspring.insight.lib.util.BSDebugger;
+import kr.co.bizspring.insight.lib.util.BSUtils;
 import kr.co.bizspring.insight.lib.util.TinyDB;
 import kr.co.bizspring.insight.lib.values.StaticValues;
 
@@ -26,6 +33,14 @@ public class Profiler {
         mContext = context;
         profileDB = new TinyDB(mContext,StaticValues.PROFILE_DB_NAME);
     }
+
+    public void putSessionData(String key, String value){   profileDB.putString(key,value);    }
+    public void putSessionLongData( String key, long value ){   profileDB.putLong(key,value);     }
+    public void putSessionIntData(String key, int value){ profileDB.putInt(key,value);  }
+
+    public String getSessionStringData(String key){ return profileDB.getString(key); }
+    public int getSessionIntegerData(String key){ return profileDB.getInt(key); }
+    public long getSessionLongData(String key){ return profileDB.getLong(key); }
 
     public void putIsMember(String isMember) {
         profileDB.putString(StaticValues.PARAM_MBR,isMember);
@@ -94,9 +109,12 @@ public class Profiler {
         long recentOrderPtm = profileDB.getLong(StaticValues.RECENT_ORDER_PTM);
         long currentOrderPtm = System.currentTimeMillis()/1000;
 
-        ltrvni += currentOrderPtm - recentOrderPtm;
+        // ltrvni값은 day(일)로 계산된 값을 가져야함. longtime 아님.
+        // ltrvni += currentOrderPtm - recentOrderPtm;
+        ltrvni += Math.round((currentOrderPtm-recentOrderPtm)/60/60/24);
+
+
         profileDB.putLong(StaticValues.PARAM_LTRVNI,ltrvni);
-        profileDB.putLong(StaticValues.RECENT_ORDER_PTM,currentOrderPtm);
         ltrvnc++;
         profileDB.putInt(StaticValues.PARAM_LTRVNC,ltrvnc);
         notifyUdRvnc();
@@ -108,12 +126,12 @@ public class Profiler {
 
     private void notifyUdRvnc(){
         int returnVisitDate = BSConfig.getInstance(mContext).getReturnVisitDate();
+        long currentOrderPtm = System.currentTimeMillis()/1000;
         if(returnVisitDate>0){
             TinyDB documentDB = new TinyDB(mContext,DocumentManager.DOCUMENT_DB_NAME);
-            long recentVisitPtm = documentDB.getLong(StaticValues.PARAM_RECENT_VISIT_PTM);
-            long currentTimeSec = System.currentTimeMillis()/1000;
+            long recentOrderPtm = profileDB.getLong(StaticValues.RECENT_ORDER_PTM);
             int udRvnc = profileDB.getInt(StaticValues.PARAM_UD_RVNC);
-            long interval = Math.round((currentTimeSec-recentVisitPtm)/60/60/24);
+            long interval = Math.round((currentOrderPtm-recentOrderPtm)/60/60/24);
             if(interval>=returnVisitDate){
                 udRvnc = 1;
             }else{
@@ -121,6 +139,7 @@ public class Profiler {
             }
             profileDB.putInt(StaticValues.PARAM_UD_RVNC,udRvnc);
         }
+        profileDB.putLong(StaticValues.RECENT_ORDER_PTM,currentOrderPtm);
     }
 
     public String getFbSource() {
@@ -144,5 +163,85 @@ public class Profiler {
     public void initOrderPTime() {
         long currentOrderPtm = System.currentTimeMillis()/1000;
         profileDB.putLong(StaticValues.RECENT_ORDER_PTM,currentOrderPtm);
+    }
+
+    public void setInstallReferrer(){
+        profileDB.putString(StaticValues.PARAM_IAT_SOURCE, profileDB.getString(StaticValues.PARAM_MAT_SOURCE));
+        profileDB.putString(StaticValues.PARAM_IAT_MEDIUM, profileDB.getString(StaticValues.PARAM_MAT_MEDIUM));
+        profileDB.putString(StaticValues.PARAM_IAT_KWD, profileDB.getString(StaticValues.PARAM_MAT_KWD));
+        profileDB.putString(StaticValues.PARAM_IAT_CAMPAIGN, profileDB.getString(StaticValues.PARAM_MAT_CAMPAIGN));
+    }
+    public boolean hasReferrerData_MAT(){
+        boolean checkFlag = false;
+        if( !(profileDB.getString(StaticValues.PARAM_MAT_SOURCE)).equals("") ||
+                !(profileDB.getString(StaticValues.PARAM_MAT_MEDIUM)).equals("") ||
+                !(profileDB.getString(StaticValues.PARAM_MAT_KWD)).equals("") ||
+                !(profileDB.getString(StaticValues.PARAM_MAT_CAMPAIGN)).equals("") ) {
+            checkFlag = true;
+        }
+        return checkFlag;
+    }
+    public HashMap<String,Object> getLatestReferrerInfo(){
+        HashMap<String,Object> referrerSet = new HashMap<String,Object>();
+
+        // mat
+        referrerSet.put(StaticValues.PARAM_MAT_SOURCE,profileDB.getString(StaticValues.PARAM_MAT_SOURCE));
+        referrerSet.put(StaticValues.PARAM_MAT_MEDIUM,profileDB.getString(StaticValues.PARAM_MAT_MEDIUM));
+        referrerSet.put(StaticValues.PARAM_MAT_KWD,profileDB.getString(StaticValues.PARAM_MAT_KWD));
+        referrerSet.put(StaticValues.PARAM_MAT_CAMPAIGN,profileDB.getString(StaticValues.PARAM_MAT_CAMPAIGN));
+        referrerSet.put(StaticValues.PARAM_MAT_UPDATE_TIME, profileDB.getLong(StaticValues.PARAM_MAT_UPDATE_TIME)); // 업데이트 된 시간 저장 후 만료시간 체크
+        referrerSet.put(StaticValues.PARAM_MAT_UPDATE_SID,profileDB.getString(StaticValues.PARAM_MAT_UPDATE_SID)); // 전환타입 분석을 위한 sid저장후 체크
+
+        // facebook
+        referrerSet.put(StaticValues.PARAM_FB_SOURCE,profileDB.getString(StaticValues.PARAM_FB_SOURCE));
+        referrerSet.put(StaticValues.PARAM_FB_UPDATE_TIME, profileDB.getLong(StaticValues.PARAM_FB_UPDATE_TIME)); // 업데이트 된 시간 저장 후 만료시간 체크
+        referrerSet.put(StaticValues.PARAM_FB_UPDATE_SID,profileDB.getString(StaticValues.PARAM_FB_UPDATE_SID)); // 전환타입 분석을 위한 sid저장후 체크
+
+        // utm
+        referrerSet.put(StaticValues.PARAM_UTM_SOURCE,profileDB.getString(StaticValues.PARAM_UTM_SOURCE));
+        referrerSet.put(StaticValues.PARAM_UTM_MEDIUM,profileDB.getString(StaticValues.PARAM_UTM_MEDIUM));
+        referrerSet.put(StaticValues.PARAM_UTM_CAMPAIGN,profileDB.getString(StaticValues.PARAM_UTM_CAMPAIGN));
+        referrerSet.put(StaticValues.PARAM_UTM_TERM,profileDB.getString(StaticValues.PARAM_UTM_TERM));
+        referrerSet.put(StaticValues.PARAM_UTM_CONTENT,profileDB.getString(StaticValues.PARAM_UTM_CONTENT));
+        referrerSet.put(StaticValues.PARAM_UTM_UPDATE_TIME, profileDB.getLong(StaticValues.PARAM_UTM_UPDATE_TIME)); // 업데이트 된 시간 저장 후 만료시간 체크
+        referrerSet.put(StaticValues.PARAM_UTM_UPDATE_SID,profileDB.getString(StaticValues.PARAM_UTM_UPDATE_SID)); // 전환타입 분석을 위한 sid저장후 체크
+
+        return referrerSet;
+    }
+
+    public boolean updateResponse(JSONObject o) {
+        try {
+            String rCode = o.getString(StaticValues.RESPONSE_CODE);
+            BSConfig.getInstance(mContext).putPref(StaticValues.RESPONSE_CODE,rCode);
+            if(rCode.equalsIgnoreCase(StaticValues.RES004)){
+                BSConfig.getInstance(mContext).putPref(StaticValues.LOCK_CODE,BSConfig.getInstance(mContext).getHashKey());
+            }
+            //일시적 장애 처리
+            if(rCode.equalsIgnoreCase(StaticValues.RES003)){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (JSONException e) {
+            BSDebugger.log(e, this);
+        }
+        return false;
+    }
+
+    public boolean shouldSend(boolean isDocumnet) {
+        String rCode = (String) BSConfig.getInstance(mContext).getPrefValue(StaticValues.RESPONSE_CODE,String.class);
+        if(rCode.equalsIgnoreCase(StaticValues.RES001)){
+            return true;
+        }else if(rCode.equalsIgnoreCase(StaticValues.RES002)){
+            return !isDocumnet;
+        }else if(rCode.equalsIgnoreCase(StaticValues.RES003)){
+            return true;
+        }else if(rCode.equalsIgnoreCase(StaticValues.RES004)){
+            String lockCode = (String) BSConfig.getInstance(mContext).getPrefValue(StaticValues.LOCK_CODE,String.class);
+            String hashCode = BSConfig.getInstance(mContext).getHashKey();
+            return !lockCode.equalsIgnoreCase(hashCode);
+        }else {
+            return true;
+        }
     }
 }
