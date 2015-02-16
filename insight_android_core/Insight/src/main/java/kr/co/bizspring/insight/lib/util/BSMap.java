@@ -59,15 +59,12 @@ public class BSMap{
         return this;
     }
 
-
-    @JavascriptInterface
     public BSMap putRevenueDataArray(String key, String[] value){
         if( key != null && value != null && value.length > 0  ){
             this.putRevenueData(key, BSUtils.joinStringToString( value ));
         }
         return this;
     }
-    @JavascriptInterface
     public BSMap putRevenueData(String key, String value){
         this.revenueMap.put(key,value);
         this.syncPageData(key, value);
@@ -81,7 +78,6 @@ public class BSMap{
         return this;
     }
 
-    @JavascriptInterface
     public boolean containsRevenueData(String key){
         return this.revenueMap.containsKey(key);
     }
@@ -94,15 +90,12 @@ public class BSMap{
         }
         return this;
     }
-
-    @JavascriptInterface
     public BSMap putGoalDataArray(String key, String[] value){
         if( key != null && value != null && value.length > 0  ){
             this.putGoalData(key, BSUtils.joinStringToString(value));
         }
         return this;
     }
-    @JavascriptInterface
     public BSMap putGoalData(String key, String value){
         if( key != null && value != null ){
             this.goalMap.put(key, value);
@@ -117,8 +110,6 @@ public class BSMap{
         }
         return this;
     }
-
-    @JavascriptInterface
     public boolean containsGoalData(String key){
         return this.goalMap.containsKey(key);
     }
@@ -130,16 +121,12 @@ public class BSMap{
         }
         return this;
     }
-
-    @JavascriptInterface
     public BSMap putPageData(String key, String value){
         if( key != null && value != null ){
             this.pageMap.put(key, value);
         }
         return this;
     }
-
-    @JavascriptInterface
     public Object getPageData(String key){
         if( this.pageMap != null ){
             return this.pageMap.get(key);
@@ -147,8 +134,6 @@ public class BSMap{
           return null;
         }
     }
-
-    @JavascriptInterface
     public String getPageDataString(String key){
         if( this.pageMap != null ){
             return this.pageMap.get(key).toString();
@@ -156,14 +141,11 @@ public class BSMap{
             return null;
         }
     }
-
-    @JavascriptInterface
     public boolean containsPageData(String key){
         return this.pageMap.containsKey(key);
     }
 
-    @JavascriptInterface
-    public void syncPageData(String key, Object value){
+    private void syncPageData(String key, Object value){
         // PAGE DATA 와 동기화 필요한 입출력 항목 처리.
         if( key.equalsIgnoreCase(StaticValues.PARAM_MVT1) || key.equalsIgnoreCase(StaticValues.PARAM_MVT2)  || key.equalsIgnoreCase(StaticValues.PARAM_MVT3) ||  key.equalsIgnoreCase(StaticValues.PARAM_PI) ){
             this.putPageData(key,String.valueOf(value));
@@ -172,13 +154,11 @@ public class BSMap{
 
     // ###############################################
     // session Data 메소드
-    @JavascriptInterface
     public BSMap putSessionData(String key, String value){
         this.targetTracker.putSessionData(key,value); // profileDB 에 저장함.
         this.syncPageData(key, value);
         return this;
     }
-    @JavascriptInterface
     public BSMap putSessionReferrer(String referrer){
         this.targetTracker.putSessionReferrer(referrer); // profileDB 에 저장함.
         this.targetTracker.updateDocument();
@@ -187,7 +167,6 @@ public class BSMap{
 
     // ###############################################
     // init Data 메소드
-    @JavascriptInterface
     public void putInitData(String key, String value){
         this.targetTracker.putSessionData(key,value); // profileDB 에 저장함.
         this.syncPageData(key, value);
@@ -198,7 +177,6 @@ public class BSMap{
     }
 
     // GOAL, REVENUE 데이터 전송 메소드
-    @JavascriptInterface
     public BSMap send(){
         boolean isSendOk = false;
         if( revenueMap != null && revenueMap.size() > 0 ){

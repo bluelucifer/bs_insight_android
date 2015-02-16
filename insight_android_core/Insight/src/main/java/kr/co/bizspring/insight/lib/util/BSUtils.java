@@ -128,14 +128,14 @@ public class BSUtils {
                 for(String spItem : split ){
                     if( spItem != null && !(spItem.trim()).equals("")){
                         spItem = spItem.trim();
-                        if( (spItem.substring(0, spItem.indexOf("="))).matches("(mat_source|mat_medium|mat_kwd|mat_campaign|fb_source|utm_source|utm_medium|utm_campaign|utm_term|utm_contents)")  ){
+                        if( (spItem.substring(0, spItem.indexOf("="))).matches("(mat_source|mat_medium|mat_kwd|mat_campaign|fb_source|utm_source|utm_medium|utm_campaign|utm_term|utm_contents|ocmp)")  ){
                             referrerInfo.put(spItem.substring(0,spItem.indexOf("=")), spItem.substring(spItem.indexOf("=")+1) );
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            BSDebugger.log(e);
         }
         return referrerInfo;
     }

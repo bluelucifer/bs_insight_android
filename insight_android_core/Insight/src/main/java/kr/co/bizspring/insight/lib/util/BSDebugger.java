@@ -44,7 +44,28 @@ public class BSDebugger {
             return false;
         }
     }
+    public static boolean log(Exception e){
+        if(!isDebug()){
+            StackTraceElement[] ste = e.getStackTrace();
+            Log.e("WiseTracker", "BS_Error Start");
+            Log.e("WiseTracker", e.getClass().getName());
+            Log.e("WiseTracker", e.getLocalizedMessage());
+            for(int i = 0 ; i < ste.length ; i++){
+                Log.e("WiseTracker", ste[i].getFileName());
+                Log.e("WiseTracker", ste[i].getClassName());
+                Log.e("WiseTracker", ste[i].getMethodName());
+                Log.e("WiseTracker", String.valueOf(ste[i].getLineNumber()));
+                Log.e("WiseTracker", ste[i].toString());
+            }
+            Log.e("WiseTracker", "BS_Error End");
+        }else{
+            e.printStackTrace();
+        }
+        return isDebug();
+    }
+
     public static boolean log(Exception e, Object c){
+        Log.e("WiseTracker", "BS_Error Start");
         if(!isDebug()){
 			StackTraceElement[] ste = e.getStackTrace();
             Log.e(c.getClass().getName(), "BS_Error Start");
@@ -61,6 +82,7 @@ public class BSDebugger {
         }else{
             e.printStackTrace();
         }
+        Log.e("WiseTracker", "BS_Error End");
         return isDebug();
     }
 

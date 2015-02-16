@@ -505,6 +505,10 @@ public class DocumentManager {
             sessionJson.put(StaticValues.PARAM_LTRVNC,profiler.getLtrvnc());
             sessionJson.put(StaticValues.PARAM_LTRVNI,profiler.getLtrvni());
             sessionJson.put(StaticValues.PARAM_UD_RVNC,profiler.getUdRvnc());
+
+            sessionJson.put(StaticValues.PARAM_PDTK,profiler.getSessionStringData(StaticValues.PARAM_PDTK));
+            sessionJson.put(StaticValues.PARAM_PUSH_MESSAGE_KEY,profiler.getSessionStringData(StaticValues.PARAM_PUSH_MESSAGE_KEY));
+
         } catch (JSONException e) {
             BSDebugger.log(e,this);
         }
@@ -724,16 +728,16 @@ public class DocumentManager {
                 profiler.putSessionData(StaticValues.PARAM_GCLID, map.get(StaticValues.PARAM_GCLID));
 
                 //광고분석 데이터 등록
-                profiler.putSessionData(StaticValues.PARAM_MAT_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
-                profiler.putSessionData(StaticValues.PARAM_MAT_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
-                profiler.putSessionData(StaticValues.PARAM_MAT_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
-                profiler.putSessionData(StaticValues.PARAM_MAT_KWD, map.get(StaticValues.PARAM_UTM_TERM));
+                profiler.putSessionData(StaticValues.PARAM_MAT_CAMPAIGN, map.get(StaticValues.PARAM_MAT_CAMPAIGN));
+                profiler.putSessionData(StaticValues.PARAM_MAT_SOURCE, map.get(StaticValues.PARAM_MAT_SOURCE));
+                profiler.putSessionData(StaticValues.PARAM_MAT_MEDIUM, map.get(StaticValues.PARAM_MAT_MEDIUM));
+                profiler.putSessionData(StaticValues.PARAM_MAT_KWD, map.get(StaticValues.PARAM_MAT_KWD));
 
                 //설치 광고 데이터 등록
-                profiler.putSessionData(StaticValues.PARAM_IAT_CAMPAIGN, map.get(StaticValues.PARAM_UTM_CAMPAIGN));
-                profiler.putSessionData(StaticValues.PARAM_IAT_SOURCE, map.get(StaticValues.PARAM_UTM_SOURCE));
-                profiler.putSessionData(StaticValues.PARAM_IAT_MEDIUM, map.get(StaticValues.PARAM_UTM_MEDIUM));
-                profiler.putSessionData(StaticValues.PARAM_IAT_KWD, map.get(StaticValues.PARAM_UTM_TERM));
+                profiler.putSessionData(StaticValues.PARAM_IAT_CAMPAIGN, map.get(StaticValues.PARAM_IAT_CAMPAIGN));
+                profiler.putSessionData(StaticValues.PARAM_IAT_SOURCE, map.get(StaticValues.PARAM_IAT_SOURCE));
+                profiler.putSessionData(StaticValues.PARAM_IAT_MEDIUM, map.get(StaticValues.PARAM_IAT_MEDIUM));
+                profiler.putSessionData(StaticValues.PARAM_IAT_KWD, map.get(StaticValues.PARAM_IAT_KWD));
             }
         } catch (Exception e) {
             BSDebugger.log(e,this);

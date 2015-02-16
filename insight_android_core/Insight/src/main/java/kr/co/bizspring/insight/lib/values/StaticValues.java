@@ -55,7 +55,7 @@ public class StaticValues {
     public static final String LAST_MONTH_STRING = "lastMonthString";
     public static final String LAST_WEEK_INT = "lastWeekInt";
     */
-    public static final String PARAM_MAT_UPDATE_TIME = "expireTimeDaily";
+    public static final String EXPIRE_TIME_DAILY = "expireTimeDaily";
     public static final String EXPIRE_TIME_WEEKLY = "expireTimeWeekly";
     public static final String EXPIRE_TIME_MONTHLY = "expireTimeMonthly";
 
@@ -96,6 +96,7 @@ public class StaticValues {
     /* 파라미터 목록  시작*/
     public static final String PARAM_DEBUG = "debug";
     public static final String PARAM_AK = "ak";
+    public static final String PARAM_PDTK = "pdtk";
     public static final String PARAM_PFNO = "pfno";
     public static final String PARAM_UUID = "uuid";
     public static final String PARAM_ADVID = "advtId";
@@ -187,19 +188,18 @@ public class StaticValues {
     public static final String PARAM_MVT1 = "mvt1";
     public static final String PARAM_MVT2 = "mvt2";
     public static final String PARAM_MVT3 = "mvt3";
-
-    public static final String PARAM_GOAL_1   = "g1";
-    public static final String PARAM_GOAL_2   = "g2";
-    public static final String PARAM_GOAL_3   = "g3";
-    public static final String PARAM_GOAL_4   = "g4";
-    public static final String PARAM_GOAL_5   = "g5";
-    public static final String PARAM_GOAL_6   = "g6";
-    public static final String PARAM_GOAL_7   = "g7";
-    public static final String PARAM_GOAL_8   = "g8";
-    public static final String PARAM_GOAL_9   = "g9";
-    public static final String PARAM_GOAL_10  = "g10";
-
-    public static final String PARAM_GOAL_APP_INSTALL = "g29";
     public static final String PARAM_GOAL_ACCEPT_PUSH ="g30";
 
- }
+
+    /*
+    * 2015.02.16 추가 파라미터
+    * **/
+    public static final String PARAM_IKWD = "ikwd";
+    public static final String PARAM_IKWD_RS = "ikwdRs";
+    public static final String PARAM_IKWD_GRP = "ikwdGrp";
+
+    public static final String PARAM_PUSH_MESSAGE_KEY = "ocmp";
+    public static final String PARAM_PUSH_MESSAGE_UPDATE_TIME = "ocmp_uptime";
+    public static final String PARAM_PUSH_MESSAGE_UPDATE_SID = "ocmp_upsid";
+
+  }

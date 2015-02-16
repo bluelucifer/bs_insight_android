@@ -206,6 +206,10 @@ public class Profiler {
         referrerSet.put(StaticValues.PARAM_UTM_UPDATE_TIME, profileDB.getLong(StaticValues.PARAM_UTM_UPDATE_TIME)); // 업데이트 된 시간 저장 후 만료시간 체크
         referrerSet.put(StaticValues.PARAM_UTM_UPDATE_SID,profileDB.getString(StaticValues.PARAM_UTM_UPDATE_SID)); // 전환타입 분석을 위한 sid저장후 체크
 
+        referrerSet.put(StaticValues.PARAM_PUSH_MESSAGE_KEY,profileDB.getString(StaticValues.PARAM_PUSH_MESSAGE_KEY)); // 전환타입 분석을 위한 sid저장후 체크
+        referrerSet.put(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_TIME, profileDB.getLong(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_TIME)); // 업데이트 된 시간 저장 후 만료시간 체크
+        referrerSet.put(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_SID,profileDB.getString(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_SID)); // 전환타입 분석을 위한 sid저장후 체크
+
         return referrerSet;
     }
 

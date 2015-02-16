@@ -40,7 +40,6 @@ import kr.co.bizspring.insight.service.InsightService;
  */
 public class BSTracker {
 
-    public static BSTracker instance;
     Context mContext;
     Map<String,BSMap> pageMap;
     Map<String,WebView> webViewMap;
@@ -48,28 +47,60 @@ public class BSTracker {
     BSConfig bsConfig;
 
     int trkCounter;
-
     int dataSendMode;
-
     int maxDataLength;
-
     int dataLengthCounter;
 
-    @JavascriptInterface
-    public static BSTracker getInstance(){
-        if(instance==null){
-            instance = new BSTracker();
-        }
-        return instance;
-    }
     protected BSTracker(){
         pageMap = new HashMap<String, BSMap>();
         webViewMap = new HashMap<>();
         trkCounter = 0;
         dataLengthCounter = 0;
     }
+    // ##############################################################################
+    // 내부 메소스
+    private void scheduleSendMode() {
+        Intent intent = new Intent(mContext, InsightService.class);
+        intent.setAction(SignalIndex.SEND_MODE_SCHEDULE);
+        intent.putExtra(StaticValues.ST_SEND_TIME,System.currentTimeMillis());
+        mContext.startService(intent);
+    }
+    private void clearInitData(){
+        // Multi Session으로 값이 연결되면 안되는 항목의 경우 여기에서 초기화 시킨다.
+        Profiler.getInstance(mContext).putSessionData(StaticValues.PARAM_MVT1, "");
+        Profiler.getInstance(mContext).putSessionData(StaticValues.PARAM_MVT2, "");
+        Profiler.getInstance(mContext).putSessionData(StaticValues.PARAM_MVT3, "");
+    }
 
-    @JavascriptInterface
+    public void checkReferrer(Intent intent) {
+        String referrerString = "";
+        Uri uri = null;
+        if( intent != null && intent.getData() != null ) {
+            uri = intent.getData();
+            referrerString =  uri.toString();
+        }
+        if(intent.hasExtra(StaticValues.PARAM_PUSH_MESSAGE_KEY)){
+            String ocmp = intent.getStringExtra(StaticValues.PARAM_PUSH_MESSAGE_KEY);
+            referrerString += "&ocmp="+ocmp;
+        }
+        this.putSessionReferrer(referrerString);
+
+
+    }
+    public void checkReferrer(){
+        Intent intent = ((Activity)this.mContext).getIntent();
+        this.checkReferrer(intent);
+    }
+
+    public boolean updateDocument(){
+        Intent intent = new Intent(mContext, InsightService.class);
+        intent.setAction(SignalIndex.UPDATE_DOCUMENT);
+        intent.putExtra(StaticValues.ST_SEND_TIME,System.currentTimeMillis());
+        mContext.startService(intent);
+        return true;
+    }
+    // ##############################################################################
+    // WiseTracker 매핑 메소스
     public BSTracker init(Context _context){
         this.mContext = _context;
         this.clearInitData();
@@ -81,42 +112,11 @@ public class BSTracker {
         BSDebugger.logAsync(this.mContext,"init");
         return this;
     }
-
-    private void scheduleSendMode() {
-        Intent intent = new Intent(mContext, InsightService.class);
-        intent.setAction(SignalIndex.SEND_MODE_SCHEDULE);
-        intent.putExtra(StaticValues.ST_SEND_TIME,System.currentTimeMillis());
-        mContext.startService(intent);
-
-    }
-
-    @JavascriptInterface
-    private void clearInitData(){
-        // Multi Session으로 값이 연결되면 안되는 항목의 경우 여기에서 초기화 시킨다.
-        Profiler.getInstance(mContext).putSessionData(StaticValues.PARAM_MVT1, "");
-        Profiler.getInstance(mContext).putSessionData(StaticValues.PARAM_MVT2, "");
-        Profiler.getInstance(mContext).putSessionData(StaticValues.PARAM_MVT3, "");
-    }
-
-    public void checkReferrer(){
-        String referrerString = "";
-        Uri uri = null;
-        Intent intent = ((Activity)this.mContext).getIntent();
-        if( intent != null && intent.getData() != null ) {
-            uri = intent.getData();
-            referrerString =  uri.toString();
-        }
-        this.putSessionReferrer(referrerString);
-    }
-
-    @JavascriptInterface
     public BSTracker putInitData(String key, String value){
         BSMap currentMap = pageMap.get(Integer.toHexString(System.identityHashCode(this.mContext)));
         currentMap.putInitData(key, value);
         return this;
     }
-
-    @JavascriptInterface
     public void initEnd(){
         Intent intent1 = new Intent(this.mContext, InsightService.class);
         intent1.setAction(SignalIndex.INIT);
@@ -125,10 +125,7 @@ public class BSTracker {
             scheduleSendMode();
         }
     }
-
     long lastSendTime = 0;
-
-    @JavascriptInterface
     public boolean sendTransaction(){
         long currentTime = System.currentTimeMillis();
         if(currentTime-lastSendTime<3000){
@@ -142,26 +139,14 @@ public class BSTracker {
         return true;
     }
 
-    @JavascriptInterface
-    public boolean updateDocument(){
-        Intent intent = new Intent(mContext, InsightService.class);
-        intent.setAction(SignalIndex.UPDATE_DOCUMENT);
-        intent.putExtra(StaticValues.ST_SEND_TIME,System.currentTimeMillis());
-        mContext.startService(intent);
-        return true;
+    //현재 페이지에서 사용하는 page데이터 저장. startPage에서 초기화 됨.
+    private BSMap currentPageMap = null;
+    public BSMap getCurrentPageMap(){
+        return this.currentPageMap;
     }
-
-
-
-
     public BSMap startPage(Object obj){
         return this.startPage(Integer.toHexString(System.identityHashCode(obj)));
     }
-
-    //현재 페이지에서 사용하는 page데이터 저장. startPage에서 초기화 됨.
-    private BSMap currentPageMap = null;
-
-    @JavascriptInterface
     public BSMap startPage(String pageCode){
         BSDebugger.logAsync(this.mContext,"startPage");
         if(pageMap.containsKey(pageCode)){
@@ -173,14 +158,10 @@ public class BSTracker {
         pageMap.put(pageCode, this.currentPageMap);
         return this.currentPageMap;
     }
-
-//    @JavascriptInterface
     public void endPage(Object obj){
         this.endPage(Integer.toHexString(System.identityHashCode(obj)));
     }
-
     //todo map size check + counter + create new document
-    @JavascriptInterface
     public void endPage(String pageCode){
         BSDebugger.logAsync(this.mContext,"endPage");
         BSMap currentMap = pageMap.get(pageCode);
@@ -193,277 +174,10 @@ public class BSTracker {
         putMap(currentMap.getPageDataMap(),TrackType.TYPE_PAGES);
         currentMap.send();
     }
-
-    /**
-     * 환경변수 설정 변수 부분.
-     **/
-    // #################################################################################
-    // GOAL
-
-    @JavascriptInterface
-    public void setGoal(String key, int value){
-        this.currentPageMap.putGoalData(key,value);
-    }
-
-    @JavascriptInterface
-    public boolean trkGoal(String key, int value){
-        setGoal(key, value);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
-    public void setAcceptPushReceived( boolean value ){
-        if( value ){ // value 가 true 일때, push 메시지 수신동의 한것으로 처리함. g29
-               setGoal(StaticValues.PARAM_GOAL_ACCEPT_PUSH,1);
-        }
-    }
-
-    @JavascriptInterface
-    public boolean trkAcceptPushReceived( boolean value ){
-        setAcceptPushReceived(value);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
-    public void setGoalProduct( String code ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["product1","product2"]   =>  product1;product2
-        this.currentPageMap.putGoalData(StaticValues.PARAM_PNC,code);
-    }
-
-    @JavascriptInterface
-    public void setGoalProductArray( String[] code ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["product1","product2"]   =>  product1;product2
-        this.currentPageMap.putGoalDataArray(StaticValues.PARAM_PNC,code);
-    }
-
-    @JavascriptInterface
-    public void setGoalProductType(String type){
-        // setGoalProduct함수를 사용해서 이미 pnc데이터가 설정된 경우에만 동작하도록 체크 해야함.
-        // 상품코드가 먼저 정의되었을 때에만 전송되도록 조건 추가.
-        // ["productType1","productType2"]   =>  productType1;productType2
-        if( this.currentPageMap.containsGoalData(StaticValues.PARAM_PNC)){
-            this.currentPageMap.putGoalData(StaticValues.PARAM_PNC_TP,type);
-        }
-    }
-
-    @JavascriptInterface
-    public void setGoalProductTypeArray(String[] type){
-        // setGoalProduct함수를 사용해서 이미 pnc데이터가 설정된 경우에만 동작하도록 체크 해야함.
-        // 상품코드가 먼저 정의되었을 때에만 전송되도록 조건 추가.
-        // ["productType1","productType2"]   =>  productType1;productType2
-        if( this.currentPageMap.containsGoalData(StaticValues.PARAM_PNC)){
-            this.currentPageMap.putGoalDataArray(StaticValues.PARAM_PNC_TP,type);
-        }
-    }
-
-    @JavascriptInterface
-    public void setGoalProductCategory( String code ){
-        // ["productCategory1","productCategory2"]   =>  productCategory1;productCategory2
-        this.currentPageMap.putGoalData(StaticValues.PARAM_PNG, code);
-    }
-
-    @JavascriptInterface
-    public void setGoalProductCategoryArray( String[] code ){
-        // ["productCategory1","productCategory2"]   =>  productCategory1;productCategory2
-        this.currentPageMap.putGoalDataArray(StaticValues.PARAM_PNG, code);
-    }
-    // #################################################################################
-    // PRODUCT 함수
-
-    public void setProduct( String code ){  setProduct(code, "");    }
-
-    @JavascriptInterface
-    public void setProduct( String code, String name ){
-        this.currentPageMap.putPageData(StaticValues.PARAM_PNC,code);
-        this.currentPageMap.putPageData(StaticValues.PARAM_PNC_NM, name);
-    }
-
-    @Deprecated
-    public boolean trkProduct( String code ){   return trkProduct(code,""); }
-
-    @Deprecated
-    public boolean trkProduct( String code, String name ){
-        setProduct(code, name);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
-    public void setProductType( String type ){
-        if(this.currentPageMap.containsPageData(StaticValues.PARAM_PNC)){
-            this.currentPageMap.putPageData(StaticValues.PARAM_PNC_TP,type);
-        }
-    }
-
-
-    // #################################################################################
-    // PRODUCT CATEGORY 함수
-
-    public void setProductCategory( String code ){
-        setProductCategory(code,"");
-    }
-    @JavascriptInterface
-    public void setProductCategory( String code, String name ){
-        this.currentPageMap.putPageData(StaticValues.PARAM_PNG,code);
-        this.currentPageMap.putPageData(StaticValues.PARAM_PNG_NM,name);
-    }
-    @Deprecated
-    public boolean trkProductCategory( String code ){   return trkProductCategory(code,"");    }
-    @Deprecated
-    public boolean trkProductCategory( String code, String name ){
-        setProductCategory(code, name);
-        return sendTransaction();
-    }
-    // #################################################################################
-    // PRODUCT(주문완료) 함수
-    @JavascriptInterface
-    public void setOrderProduct( String code ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["product1","product2"]   =>  product1;product2
-        this.currentPageMap.putRevenueData(StaticValues.PARAM_PNC,code);
-    }
-    @JavascriptInterface
-    public void setOrderProductArray( String[] code ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["product1","product2"]   =>  product1;product2
-        this.currentPageMap.putRevenueDataArray(StaticValues.PARAM_PNC,code);
-    }
-
-    @JavascriptInterface
-    public void setOrderProductType( String type ) {
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["productType1","productType2"]   =>  productType1;productType2
-        if(this.currentPageMap.containsRevenueData(StaticValues.PARAM_PNC)){
-            this.currentPageMap.putRevenueData(StaticValues.PARAM_PNC_TP,type);
-        }
-    }
-    @JavascriptInterface
-    public void setOrderProductTypeArray( String[] type ) {
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["productType1","productType2"]   =>  productType1;productType2
-        if(this.currentPageMap.containsRevenueData(StaticValues.PARAM_PNC)){
-            this.currentPageMap.putRevenueDataArray(StaticValues.PARAM_PNC_TP,type);
-        }
-    }
-
-    @JavascriptInterface
-    public void setOrderProductCategory( String code ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["productCategory1","productCategory2"]   =>  productCategory1;productCategory2
-        this.currentPageMap.putRevenueData(StaticValues.PARAM_PNG,code);
-    }
-
-    @JavascriptInterface
-    public void setOrderProductCategoryArray( String[] code ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["productCategory1","productCategory2"]   =>  productCategory1;productCategory2
-        this.currentPageMap.putRevenueDataArray(StaticValues.PARAM_PNG,code);
-    }
-
-    @JavascriptInterface
-    public void setOrderAmount( int value ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["10000","20000"]   =>  10000;20000
-        this.currentPageMap.putRevenueData(StaticValues.PARAM_AMT,value);
-    }
-    @JavascriptInterface
-    public void setOrderAmountArray( int[] value ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["10000","20000"]   =>  10000;20000
-        this.currentPageMap.putRevenueDataArray(StaticValues.PARAM_AMT,value);
-    }
-
-    @JavascriptInterface
-    public void setOrderQuantity( int value ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["1","2"]   =>  1;2
-        this.currentPageMap.putRevenueData(StaticValues.PARAM_EA,value);
-    }
-
-    @JavascriptInterface
-    public void setOrderQuantityArray( int[] value ){
-        // 배열의 형태를 파라미터로 받아서, 서버에 전송하는 json 문자열은 ; 문자를 delimiter로하여 join 결과를 전송한다.
-        // ["1","2"]   =>  1;2
-        this.currentPageMap.putRevenueDataArray(StaticValues.PARAM_EA,value);
-    }
-    // #################################################################################
-    // 컨텐츠 분석 함수
-    @JavascriptInterface
-    public void setContents( String value ){
-        this.currentPageMap.putPageData(StaticValues.PARAM_CP,value);
-    }
-    public boolean trkContents( String value ){
-        setContents(value);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
-    public void setPageIdentity( String value ){
-        this.currentPageMap.putPageData(StaticValues.PARAM_PI, value);
-    }
-    public boolean trkPageIdentity( String value ){
-        setPageIdentity(value);
-        return sendTransaction();
-    }
-    // #################################################################################
-    // 방문자 속성 분석 함수
-    @JavascriptInterface
-    public void setMember( String isMember ){
-        // Profiler.getInstance(mContext).putIsMember(isMember);
-        this.putSessionData(StaticValues.PARAM_MBR, isMember);
-    }
-    @Deprecated
-    public boolean trkMember( String isMember ){
-        setMember(isMember);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
-    public void setGender( String gender ){
-        // Profiler.getInstance(mContext).putGender(gender);
-        this.putSessionData(StaticValues.PARAM_GENDER,gender);
-    }
-    @Deprecated
-    public boolean trkGender( String gender ){
-        setGender(gender);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
-    public void setAge( String age ){
-        // Profiler.getInstance(mContext).putAge(age);
-        this.putSessionData(StaticValues.PARAM_AGE,age);
-    }
-    @Deprecated
-    public boolean trkAge( String age ){
-        setAge(age);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
-    public void setUserAttribute( String key, String attribute ){
-        switch(key){
-            case StaticValues.PARAM_UVP1 :   this.putSessionData(StaticValues.PARAM_UVP1, attribute); break;
-            case StaticValues.PARAM_UVP2 :   this.putSessionData(StaticValues.PARAM_UVP2, attribute); break;
-            case StaticValues.PARAM_UVP3 :   this.putSessionData(StaticValues.PARAM_UVP3, attribute); break;
-            case StaticValues.PARAM_UVP4 :   this.putSessionData(StaticValues.PARAM_UVP4, attribute); break;
-            case StaticValues.PARAM_UVP5 :   this.putSessionData(StaticValues.PARAM_UVP5, attribute); break;
-        }
-    }
-    @Deprecated
-    public boolean trkUserAttribute( String key, String attribute ){
-        setUserAttribute(key, attribute);
-        return sendTransaction();
-    }
-
-    @JavascriptInterface
     public void putSessionData(String key, String value){
         Profiler.getInstance(mContext).putSessionData(key, value);
         updateDocument();
     }
-
-    @JavascriptInterface
     public BSTracker putSessionReferrer(String referrer){
         /****
          * 1. referrer가 전송되어 오면 값을 업데이트 한다.
@@ -485,10 +199,15 @@ public class BSTracker {
             int interval = 0;
             if( itrKey.matches("(mat_source|mat_medium|mat_kwd|mat_campaign)") && profiler.getSessionLongData(StaticValues.PARAM_MAT_UPDATE_TIME) > 0 ){
                 interval = BSUtils.getCalDayDiff(now.getTimeInMillis(),  profiler.getSessionLongData(StaticValues.PARAM_MAT_UPDATE_TIME) );
+
             }else if( itrKey.matches("(fb_source)") && profiler.getSessionLongData(StaticValues.PARAM_FB_UPDATE_TIME) > 0  ){
                 interval = BSUtils.getCalDayDiff(now.getTimeInMillis(), profiler.getSessionLongData(StaticValues.PARAM_FB_UPDATE_TIME) );
+
             }else if( itrKey.matches("(utm_source|utm_medium|utm_campaign|utm_term|utm_content)") && profiler.getSessionLongData(StaticValues.PARAM_UTM_UPDATE_TIME) > 0 ){
                 interval = BSUtils.getCalDayDiff(now.getTimeInMillis(),  profiler.getSessionLongData(StaticValues.PARAM_UTM_UPDATE_TIME) );
+
+            }else if( itrKey.matches("(ocmp)") && profiler.getSessionLongData(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_TIME) > 0  ){
+                interval = BSUtils.getCalDayDiff(now.getTimeInMillis(),  profiler.getSessionLongData(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_TIME) );
             }
             if( interval > bsConfig.getReturnVisitDate() ){ // ReturnVisitDate 지난 경우에는 초기화 시킴.
                 profiler.putSessionData(itrKey,"");
@@ -513,6 +232,9 @@ public class BSTracker {
                     }else if( itrKey.matches("(utm_source|utm_medium|utm_campaign|utm_term|utm_content)") ){
                         profiler.putSessionLongData(StaticValues.PARAM_UTM_UPDATE_TIME,  now.getTimeInMillis() );
                         profiler.putSessionData(StaticValues.PARAM_UTM_UPDATE_SID,bsSession.getSession(false)); // 현재의 sid를 저장해둠.
+                    }else if( itrKey.matches("(ocmp)") ){
+                        profiler.putSessionLongData(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_TIME,  now.getTimeInMillis() );
+                        profiler.putSessionData(StaticValues.PARAM_PUSH_MESSAGE_UPDATE_SID,bsSession.getSession(false)); // 현재의 sid를 저장해둠.
                     }
                 }
             }
@@ -533,12 +255,8 @@ public class BSTracker {
         }
         return this;
     }
-    // #################################################################################
-    // 사용자 정의 분석 함수
-    @JavascriptInterface
-    public void setCustomMvtTag( String key, String mvtValue ){
-        this.currentPageMap.putPageData(key, mvtValue);
-    }
+
+
 
     /**
      * Map 방식 환경변수 설정 부분.
@@ -606,39 +324,6 @@ public class BSTracker {
         dataLengthCounter = 0;
     }
 
-    @JavascriptInterface
-    public void putPageCP(Object obj,String cpString){
-        putPageParam(obj, StaticValues.PARAM_CP, cpString);
-    }
-    @JavascriptInterface
-    public void putPagePI(Object obj,String piString){
-        putPageParam(obj, StaticValues.PARAM_PI, piString);
-    }
-    @JavascriptInterface
-    public void putPagePncTp(Object obj,String targetString){
-        putPageParam(obj, StaticValues.PARAM_PNC_TP, targetString);
-    }
-    @JavascriptInterface
-    public void putPagePnc(Object obj,String targetString){
-        putPageParam(obj,StaticValues.PARAM_PNC,targetString);
-    }
-    @JavascriptInterface
-    public void putPagePncName(Object obj,String targetString){
-        putPageParam(obj,StaticValues.PARAM_PNC_NM,targetString);
-    }
-    @JavascriptInterface
-    public void putPagePng(Object obj,String targetString){
-        putPageParam(obj,StaticValues.PARAM_PNG,targetString);
-    }
-    @JavascriptInterface
-    public void putPagePngName(Object obj,String targetString){
-        putPageParam(obj,StaticValues.PARAM_PNG_NM,targetString);
-    }
-    @JavascriptInterface
-    public void putPageMTV(Object obj,int id,String targetString){
-        putPageParam(obj,StaticValues.PARAM_MTV+String.valueOf(id),targetString);
-    }
-
     public void putPageParam(Object obj, String ParamName,Object paramValue){
         String pageCode;
         if(obj instanceof String){
@@ -667,8 +352,6 @@ public class BSTracker {
         }
         return map;
     }
-
-    @JavascriptInterface
     public BSMap builder(String obj) {
         String pageCode;
         pageCode = obj;
