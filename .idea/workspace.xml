@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0a28e65d-0806-45b7-9255-a17af0732dad" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bs_insight_android.git.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/insight_android_core/Insight/Insight.iml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/bin/classes/kr/co/bizspring/insight/BuildConfig.class" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/bin/classes/kr/co/bizspring/insight/BuildConfig.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Insight-debug.aar" afterPath="$PROJECT_DIR$/Insight-debug.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Insight-release.aar" afterPath="$PROJECT_DIR$/Insight-release.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.aar" afterPath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/bkg.png" afterPath="$PROJECT_DIR$/images/bkg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/blacktocat.png" afterPath="$PROJECT_DIR$/images/blacktocat.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/classes.jar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/gradle/wrapper/gradle-wrapper.jar" afterPath="$PROJECT_DIR$/insight_android_core/gradle/wrapper/gradle-wrapper.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-hdpi-v4/ic_launcher.png" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-hdpi-v4/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-mdpi-v4/ic_launcher.png" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-mdpi-v4/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-xhdpi-v4/ic_launcher.png" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-xhdpi-v4/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-xxhdpi-v4/ic_launcher.png" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/drawable-xxhdpi-v4/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.aar.zip" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.aar.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.aar" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.gitignore" afterPath="$PROJECT_DIR$/insight_android_core/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/.gitignore" afterPath="$PROJECT_DIR$/insight_android_core/Insight/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/.name" afterPath="$PROJECT_DIR$/insight_android_core/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/bin/AndroidManifest.xml" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/bin/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/AndroidManifest.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/androidTest/java/kr/co/bizspring/insight/ApplicationTest.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/androidTest/java/kr/co/bizspring/insight/ApplicationTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/config/BSConfig.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/config/BSConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/BSDebugger.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/BSDebugger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/config/BSLocalConfig.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/config/BSLocalConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/BSMap.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/BSMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/tracker/BSSession.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/tracker/BSSession.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/BSTracker.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/BSTracker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/BSUtils.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/BSUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/gen/kr/co/bizspring/insight/BuildConfig.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/gen/kr/co/bizspring/insight/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/network/CallBackInterface.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/network/CallBackInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/Connectivity.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/Connectivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/tracker/DocumentManager.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/tracker/DocumentManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/FaceBookWrapper.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/FaceBookWrapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/FileException.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/FileException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/FileObjectQueue.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/FileObjectQueue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/InMemoryObjectQueue.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/InMemoryObjectQueue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.aar.md5" afterPath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.aar.sha1" afterPath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.pom.md5" afterPath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.pom.sha1" afterPath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.pom" afterPath="$PROJECT_DIR$/insight_android_core/Insight/unspecified/Insight-unspecified.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/receiver/InsightReceiver.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/receiver/InsightReceiver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/service/InsightService.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/service/InsightService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/JsonStringCompress.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/JsonStringCompress.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/ObjectQueue.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/ObjectQueue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/tracker/Profiler.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/tracker/Profiler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/QueueFile.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/QueueFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/R.txt" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/network/RestTask.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/network/RestTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/SerializedConverter.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/SerializedConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/values/SignalIndex.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/values/SignalIndex.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/values/StaticValues.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/values/StaticValues.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/Task.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/Task.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/TaskInjector.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/TaskInjector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/TaskQueue.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/squareup/tape/TaskQueue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/TinyDB.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/util/TinyDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/values/TrackType.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/lib/values/TrackType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/WiseTracker.java" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/java/kr/co/wisetracker/insight/WiseTracker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/app_tracker.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/app_tracker.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/bs_insight_config.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/bs_insight_config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/bs_local_config.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/bs_local_config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/build.gradle" afterPath="$PROJECT_DIR$/insight_android_core/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/build.gradle" afterPath="$PROJECT_DIR$/insight_android_core/Insight/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/compiler.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/deploy.bat" afterPath="$PROJECT_DIR$/insight_android_core/deploy.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/ecommerce_tracker.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/ecommerce_tracker.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/encodings.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/facebook.iml" afterPath="$PROJECT_DIR$/insight_android_core/Insight/facebook.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/global_tracker.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/xml/global_tracker.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/insight_android_core/gradle/wrapper/gradle-wrapper.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/gradle.properties" afterPath="$PROJECT_DIR$/insight_android_core/gradle.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/gradle.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew.bat" afterPath="$PROJECT_DIR$/gradlew.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/gradlew.bat" afterPath="$PROJECT_DIR$/insight_android_core/gradlew.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/index.html" afterPath="$PROJECT_DIR$/gradle/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/index.html" afterPath="$PROJECT_DIR$/gradle/wrapper/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/index.html" afterPath="$PROJECT_DIR$/images/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascripts/index.html" afterPath="$PROJECT_DIR$/javascripts/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stylesheets/index.html" afterPath="$PROJECT_DIR$/stylesheets/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.1/insight-android-sdk-0.1.1.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.2/insight-android-sdk-0.1.2.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.3/insight-android-sdk-0.1.3.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.5/insight-android-sdk-0.1.5.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.6/insight-android-sdk-0.1.6.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.8/insight-android-sdk-0.1.8.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.2.0/insight-android-sdk-0.2.0.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.1.0/insight-android-sdk-19.1.0.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.1/insight-android-sdk-19.2.1.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.2/insight-android-sdk-19.2.2.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.3/insight-android-sdk-19.2.3.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/19.2.4/insight-android-sdk-19.2.4.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.1/insight-android-sdk-21.0.1.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.12/insight-android-sdk-21.0.12.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.2/insight-android-sdk-21.0.2.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.4/insight-android-sdk-21.0.4.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.5/insight-android-sdk-21.0.5.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.aar.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.aar.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.pom.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.pom.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.pom.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.pom.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.pom" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/21.0.6/insight-android-sdk-21.0.6.pom" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/insight_android_core.iml" afterPath="$PROJECT_DIR$/insight_android_core/insight_android_core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/insight_core.iml" afterPath="$PROJECT_DIR$/insight_android_core/insight_core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/bin/jarlist.cache" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/bin/jarlist.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascripts/main.js" afterPath="$PROJECT_DIR$/javascripts/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/maven-metadata.xml.md5" afterPath="$PROJECT_DIR$/insight_android_core/Insight/maven-metadata.xml.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/maven-metadata.xml.md5" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/maven-metadata.xml.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/maven-metadata.xml.sha1" afterPath="$PROJECT_DIR$/insight_android_core/Insight/maven-metadata.xml.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/maven-metadata.xml.sha1" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/maven-metadata.xml.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/maven-metadata.xml" afterPath="$PROJECT_DIR$/insight_android_core/Insight/maven-metadata.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/maven-metadata.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/maven-metadata.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/misc.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/modules.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/newrelic.properties" afterPath="$PROJECT_DIR$/insight_android_core/Insight/newrelic.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/params.json" afterPath="$PROJECT_DIR$/params.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/copyright/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/proguard-rules.pro" afterPath="$PROJECT_DIR$/insight_android_core/Insight/proguard-rules.pro" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/Insight/src/main/project.properties" afterPath="$PROJECT_DIR$/insight_android_core/Insight/src/main/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stylesheets/pygment_trac.css" afterPath="$PROJECT_DIR$/stylesheets/pygment_trac.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/scopes/scope_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/settings.gradle" afterPath="$PROJECT_DIR$/insight_android_core/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stylesheets/stylesheet.css" afterPath="$PROJECT_DIR$/stylesheets/stylesheet.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/values/values.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/values-v21/values.xml" afterPath="$PROJECT_DIR$/kr/co/bizspring/insight-android-sdk/0.1.0/insight-android-sdk-0.1.0/res/values-v21/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insight_android_core/.idea/vcs.xml" afterPath="$PROJECT_DIR$/insight_android_core/.idea/vcs.xml" />
+    </list>
+    <ignored path="bs_insight_android.git.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/build/classes/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="bs_insight_android.git" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.2711865">
+              <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/build.gradle" />
+      </list>
+    </option>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="13" />
+    <option name="y" value="23" />
+    <option name="width" value="1267" />
+    <option name="height" value="723" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="AndroidView" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bs_insight_android.git" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bs_insight_android.git" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="options.lastSelected" value="com.genymobile.genymotion.ide.idea.GdmSettings" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../insightmobilesdk_testing.git" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a28e65d-0806-45b7-9255-a17af0732dad" name="Default" comment="" />
+      <created>1434353389845</created>
+      <option name="number" value="Default" />
+      <updated>1434353389845</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="13" y="23" width="1267" height="723" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3294893" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24979591" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2711865">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

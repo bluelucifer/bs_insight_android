@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.co.bizspring.insight">
+    package="kr.co.wisetracker.insight">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,14 +19,14 @@
         <service android:name="com.google.android.gms.tagmanager.InstallReferrerService"/>
 
         <service
-            android:name="kr.co.bizspring.insight.service.InsightService" android:enabled="true">
+            android:name="kr.co.wisetracker.insight.service.InsightService" android:enabled="true">
             <intent-filter>
-                <action android:name="kr.co.bizspring.insight.lib.StaticValues.START_SERVICE" />
+                <action android:name="kr.co.wisetracker.insight.lib.StaticValues.START_SERVICE" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
 
-        <receiver android:name="kr.co.bizspring.insight.receiver.InsightReceiver" android:exported="true">
+        <receiver android:name="kr.co.wisetracker.insight.receiver.InsightReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />

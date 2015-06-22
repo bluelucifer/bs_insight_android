@@ -21,8 +21,8 @@ dependencies {
 android {
     sourceSets {
         main {
-            manifest.srcFile 'Insight/app/src/main/AndroidManifest.xml'
-            java.srcDirs = ['Insight/app/src/main/java’]
+            manifest.srcFile = 'Insight/app/src/main/AndroidManifest.xml'
+            java.srcDirs = ['Insight/app/src/main/java']
             res.srcDirs = ['Insight/app/src/main/res']
         }
     }

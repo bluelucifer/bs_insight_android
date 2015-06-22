@@ -1,16 +1,18 @@
+
 apply plugin: 'com.android.library'
+
 apply plugin: 'maven'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
 //        applicationId "kr.co.bizspring.insight"
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 21
         versionCode 12
-        versionName "21.0.12"
+        versionName "21.1.39"
     }
 
     compileOptions {
@@ -27,27 +29,41 @@ android {
 
 repositories {
     mavenCentral()
-   //jcenter()
 }
-
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.squareup:tape:1.2.3'
+//    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.google.android.gms:play-services:+'
-//    compile 'com.android.support:appcompat-v7:+'
 }
-//def coreAarFile = file('build/outputs/aar/Insight-release.aar')
-//artifacts {
-//    archives coreAarFile
-//}
-
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "file:///Users/zerolucifer/Documents/git/bs_insight_android.git")
-            pom.groupId = 'kr.co.bizspring'
+            repository(url: "file:///D://_Playground//OfficeProject//build_SDK")
+            pom.groupId = 'kr.co.wisetracker'
             pom.artifactId = 'insight-android-sdk'
-            pom.version = '21.0.12'
+            pom.version = '21.1.39'
         }
     }
+}
+
+task clearJar(type: Delete) {
+    delete 'build/libs/WiseTracker.jar'
+}
+task makeJar(type: Copy) {
+    from('build/intermediates/bundles/release/')
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', 'WiseTracker.jar')
+}
+
+makeJar.dependsOn(clearJar, build)
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'WiseTracker',
+                'Implementation-Version': '21.1.39'
+    }
+//    baseName = project.name + '-all'
+    from 'src/main/java'
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', 'WiseTracker.jar')
 }
