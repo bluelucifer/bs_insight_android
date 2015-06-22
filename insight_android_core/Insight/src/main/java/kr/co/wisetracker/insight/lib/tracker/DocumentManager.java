@@ -166,9 +166,16 @@ public class DocumentManager {
                         jsonString += buffer;
                     }
                     if(jsonString.equalsIgnoreCase("")){
-                        documetNameList.remove(0);
-                        documentDB.putList(DOCUMENT_TARGET_NAME,documetNameList);
-                        sendDocumet();
+                        TimerTask task = new TimerTask() {
+                            @Override
+                            public void run() {
+                                documetNameList.remove(0);
+                                documentDB.putList(DOCUMENT_TARGET_NAME, documetNameList);
+                                sendDocumet();
+                            }
+                        };
+                        Timer timer = new Timer();
+                        timer.schedule(task, 1);
                         return;
                     }
                     final JSONObject document = new JSONObject(jsonString);
@@ -194,7 +201,14 @@ public class DocumentManager {
                         rCount++;
                         document.put(StaticValues.RETRY_COUNT,rCount);
                         if(rCount>5){
-                            nextSendDocument();
+                            TimerTask task = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    nextSendDocument();
+                                }
+                            };
+                            Timer timer = new Timer();
+                            timer.schedule(task, 1);
                             return;
                         }
                     }else {
@@ -281,19 +295,40 @@ public class DocumentManager {
                             @Override
                             public void onErrorCodefind(int statusCode, String statusString) {
                                 sendLock = false;
-                                sendDocumet();
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        sendDocumet();
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task,1);
                                 BSDebugger.log(statusString);
                             }
                         });
                         sendLock = true;
                         task.execute();
                     }else{
-                        nextSendDocument();
+                        TimerTask task = new TimerTask() {
+                            @Override
+                            public void run() {
+                                nextSendDocument();
+                            }
+                        };
+                        Timer timer = new Timer();
+                        timer.schedule(task, 1);
                     }
 
                 } catch (Exception e) {
                     //읽는데 문제가 있으면 삭제하고 다시 시작.
-                    nextSendDocument();
+                    TimerTask task = new TimerTask() {
+                        @Override
+                        public void run() {
+                            nextSendDocument();
+                        }
+                    };
+                    Timer timer = new Timer();
+                    timer.schedule(task, 1);
                     BSDebugger.log(e,DocumentManager.this);
                 }
             }else{
